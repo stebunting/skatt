@@ -1,0 +1,35 @@
+@use "fonts" as fonts;
+@use "colours" as colours;
+
+html,
+body,
+#root {
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+}
+
+body {
+	font-family: fonts.$base-font;
+}
+
+h1 {
+	text-align: center;
+	text-transform: uppercase;
+}
+
+input,
+select,
+button {
+	border: 1px colours.$grey solid;
+	border-radius: 4px;
+	padding: 0.25rem 0.5rem;
+	outline: none;
+}
+
+button {
+	cursor: pointer;
+}

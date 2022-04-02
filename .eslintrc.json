@@ -1,0 +1,51 @@
+{
+	"env": {
+		"browser": true,
+		"es2022": true,
+		"jest": true
+	},
+	"plugins": [
+		"react",
+		"jsx-a11y",
+		"@typescript-eslint"
+	],
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+		"plugin:jsx-a11y/recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"settings": {
+    "react": {
+      "version": "detect"
+    }
+	},
+	"ignorePatterns": [
+		"webpack.config.js",
+		"dist/**/*"
+	],
+	"rules": {
+		"indent": ["warn", "tab"],
+		"linebreak-style": ["warn", "unix"],
+		"quotes": ["warn", "double"],
+		"semi": ["warn", "always"],
+		"comma-dangle": ["warn", "always-multiline"],
+		"eol-last": ["warn", "always"],
+		"no-trailing-spaces": ["warn", {
+			"skipBlankLines": false,
+			"ignoreComments": false
+		}],
+		"sort-imports": ["warn", {
+			"ignoreDeclarationSort": true
+		}]
+	}
+}

@@ -1,0 +1,272 @@
+{
+	"2024": {
+		"schablonavdrag": 25,
+		"prisbasbelopp": 57300,
+		"inkomstbasbelopp": 76200,
+		"municipalIncomeTaxRate": 29.82,
+		"capitalIncomeTaxRate": 30,
+		"deductibles": {
+			"healthInsuranceTaxRate": 3.64,
+			"parentalInsuranceTaxRate": 2.6,
+			"retirementPensionTaxRate": 10.21,
+			"survivorsPensionContributionRate": 0.6,
+			"labourMarketTaxRate": 0.1,
+			"occupationalInjuryTaxRate": 0.2,
+			"generalPayrollTaxRate": 11.62
+		},
+		"reductionForActiveBusiness": {
+			"rate": 7.5,
+			"limit": 15000
+		},
+		"funeralTaxRate": 0.065,
+		"publicServiceTax": {
+			"rate": 1,
+			"limit": 1219
+		},
+		"jobbSkatteavdragRate": {
+			"breakpoints": [0.91, 3.24, 8.08, 13.54],
+			"rate": [38.74, 16.43, 0, 0],
+			"prisbasbeloppAmount": [0.91, 1.813, 2.608, 2.608]
+		}
+	},
+	"2023": {
+		"schablonavdrag": 25,
+		"prisbasbelopp": 52500,
+		"inkomstbasbelopp": 74300,
+		"municipalIncomeTaxRate": 29.82,
+		"capitalIncomeTaxRate": 30,
+		"deductibles": {
+			"healthInsuranceTaxRate": 3.64,
+			"parentalInsuranceTaxRate": 2.6,
+			"retirementPensionTaxRate": 10.21,
+			"survivorsPensionContributionRate": 0.6,
+			"labourMarketTaxRate": 0.1,
+			"occupationalInjuryTaxRate": 0.2,
+			"generalPayrollTaxRate": 11.62
+		},
+		"reductionForActiveBusiness": {
+			"rate": 7.5,
+			"limit": 15000
+		},
+		"funeralTaxRate": 0.065,
+		"publicServiceTax": {
+			"rate": 1,
+			"limit": 1300
+		},
+		"jobbSkatteavdragRate": {
+			"breakpoints": [0.91, 3.24, 8.08, 13.54],
+			"rate": [38.74, 12.8, 0, 0],
+			"prisbasbeloppAmount": [0.91, 1.812, 2.432, 2.432]
+		}
+	},
+	"2022": {
+		"schablonavdrag": 25,
+		"prisbasbelopp": 48300,
+		"inkomstbasbelopp": 71000,
+		"municipalIncomeTaxRate": 29.82,
+		"capitalIncomeTaxRate": 30,
+		"deductibles": {
+			"healthInsuranceTaxRate": 3.64,
+			"parentalInsuranceTaxRate": 2.6,
+			"retirementPensionTaxRate": 10.21,
+			"survivorsPensionContributionRate": 0.6,
+			"labourMarketTaxRate": 0.1,
+			"occupationalInjuryTaxRate": 0.2,
+			"generalPayrollTaxRate": 11.62
+		},
+		"reductionForActiveBusiness": {
+			"rate": 7.5,
+			"limit": 15000
+		},
+		"funeralTaxRate": 0.065,
+		"publicServiceTax": {
+			"rate": 1,
+			"limit": 1327
+		},
+		"jobbSkatteavdragRate": {
+			"breakpoints": [0.91, 3.24, 8.08, 13.54],
+			"rate": [38.74, 12.8, 0, 0],
+			"prisbasbeloppAmount": [0.91, 1.812, 2.432, 2.432]
+		}
+	},
+	"2021": {
+		"schablonavdrag": 25,
+		"prisbasbelopp": 47600,
+		"inkomstbasbelopp": 68200,
+		"municipalIncomeTaxRate": 29.82,
+		"capitalIncomeTaxRate": 30,
+		"deductibles": {
+			"healthInsuranceTaxRate": 3.64,
+			"parentalInsuranceTaxRate": 2.6,
+			"retirementPensionTaxRate": 10.21,
+			"survivorsPensionContributionRate": 0.6,
+			"labourMarketTaxRate": 0.1,
+			"occupationalInjuryTaxRate": 0.2,
+			"generalPayrollTaxRate": 11.62
+		},
+		"reductionForActiveBusiness": {
+			"rate": 7.5,
+			"limit": 15000
+		},
+		"funeralTaxRate": 0.065,
+		"publicServiceTax": {	
+			"rate": 1,
+			"limit": 1329
+		},
+		"jobbSkatteavdragRate": {
+			"breakpoints": [0.91, 3.24, 8.08, 13.54],
+			"rate": [34.05, 12.8, 0, 0],
+			"prisbasbeloppAmount": [0.91, 1.703, 2.323, 2.323]
+		}
+	},
+	"2020": {
+		"schablonavdrag": 25,
+		"prisbasbelopp": 47300,
+		"inkomstbasbelopp": 66800,
+		"municipalIncomeTaxRate": 29.82,
+		"capitalIncomeTaxRate": 30,
+		"deductibles": {
+			"healthInsuranceTaxRate": 3.64,
+			"parentalInsuranceTaxRate": 2.6,
+			"retirementPensionTaxRate": 10.21,
+			"survivorsPensionContributionRate": 0.6,
+			"labourMarketTaxRate": 0.1,
+			"occupationalInjuryTaxRate": 0.2,
+			"generalPayrollTaxRate": 11.62
+		},
+		"reductionForActiveBusiness": {
+			"rate": 7.5,
+			"limit": 15000
+		},
+		"funeralTaxRate": 0.065,
+		"publicServiceTax": {
+			"rate": 1,
+			"limit": 1397
+		},
+		"jobbSkatteavdragRate": {
+			"breakpoints": [0.91, 3.24, 8.08, 13.54],
+			"rate": [34.05, 12.8, 0, 0],
+			"prisbasbeloppAmount": [0.91, 1.703, 2.323, 2.323]
+		}
+	},
+	"2019": {
+		"schablonavdrag": 25,
+		"prisbasbelopp": 46500,
+		"inkomstbasbelopp": 64400,
+		"municipalIncomeTaxRate": 29.82,
+		"capitalIncomeTaxRate": 30,
+		"deductibles": {
+			"healthInsuranceTaxRate": 3.64,
+			"parentalInsuranceTaxRate": 2.6,
+			"retirementPensionTaxRate": 10.21,
+			"survivorsPensionContributionRate": 0.6,
+			"labourMarketTaxRate": 0.1,
+			"occupationalInjuryTaxRate": 0.2,
+			"generalPayrollTaxRate": 11.62
+		},
+		"reductionForActiveBusiness": {
+			"rate": 7.5,
+			"limit": 15000
+		},
+		"funeralTaxRate": 0.065,
+		"publicServiceTax": {
+				"rate": 1,
+				"limit": 1347
+		},
+		"jobbSkatteavdragRate": {
+			"breakpoints": [0.91, 3.24, 8.08, 13.54],
+			"rate": [34.05, 12.8, 0, 0],
+			"prisbasbeloppAmount": [0.91, 1.703, 2.323, 2.323]
+		}
+	},
+	"2018": {
+		"schablonavdrag": 25,
+		"prisbasbelopp": 45500,
+		"inkomstbasbelopp": 62500,
+		"municipalIncomeTaxRate": 29.98,
+		"capitalIncomeTaxRate": 30,
+		"deductibles": {
+			"healthInsuranceTaxRate": 4.44,
+			"parentalInsuranceTaxRate": 2.6,
+			"retirementPensionTaxRate": 10.21,
+			"survivorsPensionContributionRate": 0.7,
+			"labourMarketTaxRate": 0.1,
+			"occupationalInjuryTaxRate": 0.2,
+			"generalPayrollTaxRate": 10.72
+		},
+		"reductionForActiveBusiness": {
+			"rate": 7.5,
+			"limit": 15000
+		},
+		"funeralTaxRate": 0.075,
+		"publicServiceTax": {
+				"rate": 0,
+				"limit": 0
+		},
+		"jobbSkatteavdragRate": {
+			"breakpoints": [0.91, 2.94, 8.08, 13.54],
+			"rate": [33.2, 11.1, 0, 0],
+			"prisbasbeloppAmount": [0.91, 1.584, 2.155, 2.155]
+		}
+	},
+	"2017": {
+		"schablonavdrag": 25,
+		"prisbasbelopp": 44800,
+		"inkomstbasbelopp": 61500,
+		"municipalIncomeTaxRate": 29.98,
+		"capitalIncomeTaxRate": 30,
+		"deductibles": {
+			"healthInsuranceTaxRate": 4.44,
+			"parentalInsuranceTaxRate": 2.6,
+			"retirementPensionTaxRate": 10.21,
+			"survivorsPensionContributionRate": 0.7,
+			"labourMarketTaxRate": 0.1,
+			"occupationalInjuryTaxRate": 0.2,
+			"generalPayrollTaxRate": 10.72
+		},
+		"reductionForActiveBusiness": {
+			"rate": 7.5,
+			"limit": 15000
+		},
+		"funeralTaxRate": 0.075,
+		"publicServiceTax": {
+				"rate": 0,
+				"limit": 0
+		},
+		"jobbSkatteavdragRate": {
+			"breakpoints": [0.91, 2.94, 8.08, 13.54],
+			"rate": [33.2, 11.1, 0, 0],
+			"prisbasbeloppAmount": [0.91, 1.584, 2.155, 2.155]
+		}
+	},
+	"2016": {
+		"schablonavdrag": 25,
+		"prisbasbelopp": 44300,
+		"inkomstbasbelopp": 59300,
+		"municipalIncomeTaxRate": 29.98,
+		"capitalIncomeTaxRate": 30,
+		"deductibles": {
+			"healthInsuranceTaxRate": 4.94,
+			"parentalInsuranceTaxRate": 2.6,
+			"retirementPensionTaxRate": 10.21,
+			"survivorsPensionContributionRate": 1.17,
+			"labourMarketTaxRate": 0.1,
+			"occupationalInjuryTaxRate": 0.3,
+			"generalPayrollTaxRate": 9.65
+		},
+		"reductionForActiveBusiness": {
+			"rate": 7.5,
+			"limit": 15000
+		},
+		"funeralTaxRate": 0.075,
+		"publicServiceTax": {
+				"rate": 0,
+				"limit": 0
+		},
+		"jobbSkatteavdragRate": {
+			"breakpoints": [0.91, 2.94, 8.08, 13.54],
+			"rate": [33.2, 11.1, 0, 0],
+			"prisbasbeloppAmount": [0.91, 1.584, 2.155, 2.155]
+		}
+	}
+}

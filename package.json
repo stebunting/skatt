@@ -1,0 +1,53 @@
+{
+  "name": "skatt-calculator",
+  "version": "1.0.0",
+  "description": "Swedish Tax Calculator",
+  "main": "src/index.tsx",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "webpack --mode=production",
+    "postbuild": "rm dist/**/*.LICENSE.txt",
+    "dev": "webpack serve --mode=development",
+    "lint": "eslint src",
+    "fix": "eslint src --fix",
+    "lint-css": "stylelint **/*.scss",
+    "fix-css": "stylelint **/*.scss --fix",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Steve Bunting",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.2.0"
+  },
+  "devDependencies": {
+    "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@typescript-eslint/eslint-plugin": "^8.24.1",
+    "@typescript-eslint/parser": "^8.24.1",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.20.1",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-webpack-plugin": "^4.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^29.7.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "sass": "^1.49.11",
+    "sass-loader": "^16.0.5",
+    "stylelint": "^16.14.1",
+    "stylelint-config-standard-scss": "^14.0.0",
+    "stylelint-webpack-plugin": "^5.0.1",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.2.8",
+    "typescript": "^5.7.3",
+    "webpack": "^5.71.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  }
+}
