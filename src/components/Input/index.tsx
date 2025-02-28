@@ -3,7 +3,6 @@ import React from "react";
 import { classes } from "~/lib/classes";
 import { formatNumber } from "~/lib/format";
 import { IncomeDetails } from "~/lib/calculations";
-import { CalculatedValues } from "~/views/IndexView/Calculator/useCalculator";
 
 import s from "./style.module.scss";
 
@@ -17,7 +16,7 @@ interface InputProps {
 
 interface CalculatedProps {
 	label: string;
-	id: keyof CalculatedValues;
+	id: string;
 	value: number;
 	symbol?: string;
 	subCalculation?: boolean;

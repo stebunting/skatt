@@ -1,42 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { calculate, IncomeDetails } from "~/lib/calculations";
+import { IncomeDetails, TaxDetails, calculate } from "~/lib/calculations";
 import { Year } from "~/typings/global";
 import data from "~/lib/data.json";
 
-
-export interface CalculatedValues {
-	egenavgiftDeduction: number;
-	earnedIncome: number;
-	grundAvdrag: number;
-	taxableIncome: number;
-	pensionableEmploymentIncome: number;
-	pensionableOtherIncome: number;
-	municipalIncomeTax: number;
-	capitalIncomeTax: number;
-
-	healthInsuranceTax: number;
-	parentalInsuranceTax: number;
-	retirementPensionTax: number;
-	survivorsPensionContribution: number;
-	labourMarketTax: number;
-	occupationalInjuryTax: number;
-	generalPayrollTax: number;
-	reductionForActiveBusiness: number;
-	totalEgenavgifter: number;
-
-	pensionTaxEmployed: number;
-	pensionTaxOther: number;
-
-	funeralTax: number;
-	showPublicServiceTax: boolean;
-	publicServiceTax: number;
-	totalTax: number;
-
-	employmentTaxDeduction: number;
-	totalFinalTax: number;
-	totalFinalTaxRate: number;
-}
 
 export function useCalculator(initialYear: Year) {
 	const [formInput, setIncomeDetails] = useState<IncomeDetails>({
@@ -54,37 +21,49 @@ export function useCalculator(initialYear: Year) {
 		capitalExpenses: 0,
 		rutArbete: 0,
 	});
-	const [calculatedValues, setCalculatedValues] = useState<CalculatedValues>({
-		egenavgiftDeduction: 0,
-		earnedIncome: 0,
-		grundAvdrag: 0,
-		taxableIncome: 0,
-		pensionableEmploymentIncome: 0,
-		pensionableOtherIncome: 0,
-		municipalIncomeTax: 0,
-		capitalIncomeTax: 0,
-
-		healthInsuranceTax: 0,
-		parentalInsuranceTax: 0,
-		retirementPensionTax: 0,
-		survivorsPensionContribution: 0,
-		labourMarketTax: 0,
-		occupationalInjuryTax: 0,
-		generalPayrollTax: 0,
-		reductionForActiveBusiness: 0,
-		totalEgenavgifter: 0,
-
-		pensionTaxEmployed: 0,
-		pensionTaxOther: 0,
-
-		funeralTax: 0,
-		showPublicServiceTax: false,
-		publicServiceTax: 0,
-		totalTax: 0,
-
-		employmentTaxDeduction: 0,
-		totalFinalTax: 0,
-		totalFinalTaxRate: 0,
+	const [calculatedValues, setCalculatedValues] = useState<TaxDetails>({
+		income: {
+			earnedIncome: 0,
+			grundAvdrag: 0,
+			taxableEarnedIncome: 0,
+			pensionable: {
+				employment: 0,
+				other: 0,
+			},
+		},
+		taxes: {
+			municipalIncomeTax: 0,
+			stateIncomeTax: 0,
+			stateCapitalTax: 0,
+			pensionContribution: {
+				income: 0,
+				other: 0,
+			},
+			egenavgifter: {
+				deduction: 0,
+				healthInsuranceTax: 0,
+				parentalInsuranceTax: 0,
+				retirementPensionTax: 0,
+				survivorsPensionContribution: 0,
+				labourMarketTax: 0,
+				occupationalInjuryTax: 0,
+				generalPayrollTax: 0,
+				reductionForActiveBusiness: 0,
+				total: 0,
+			},
+			funeralFee: 0,
+			publicServiceFee: 0,
+			total: 0,
+		},
+		taxReductions: {
+			pensionContribution: 0,
+			jobbSkatteAvdrag: 0,
+			taxableEarnedIncomeReduction: 0,
+			capitalDeficitReduction: 0,
+			rutArbete: 0,
+			total: 0,
+		},
+		finalTax: 0,
 	});
 	const [year, setYear] = useState<Year>(initialYear);
 

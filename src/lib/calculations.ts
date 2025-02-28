@@ -253,7 +253,7 @@ export function getCapitalDeficit(amount: number, rate: CapitalDeficit) {
 		: getAmountByPercentage(rate.limit, rate.rate) + getAmountByPercentage(amount + rate.limit, rate.remainingRate * -1);
 }
 
-export function calculateNew(i: IncomeDetails, d: DataPayload): TaxDetails {
+export function calculate(i: IncomeDetails, d: DataPayload): TaxDetails {
 	// Capital Gain/Loss
 	const capitalTotal = i.capitalIncome + i.interestDistribution - i.capitalExpenses;
 	const stateCapitalTax = capitalTotal > 0
@@ -352,59 +352,5 @@ export function calculateNew(i: IncomeDetails, d: DataPayload): TaxDetails {
 			total: totalTaxReductions,
 		},
 		finalTax,
-	};
-}
-
-export function calculate(formInput: IncomeDetails, d: DataPayload) {
-	const { salary, activeIncome, passiveIncome, capitalIncome, previousEgenavgift, previousClaimedEgenavgift } = formInput;
-	const totalSelfEmployedIncome = activeIncome + passiveIncome + previousClaimedEgenavgift - previousEgenavgift;
-
-	const egenavgifter = getEgenavgifter(totalSelfEmployedIncome, activeIncome, d);
-
-	const earnedIncome = roundHundred(salary + totalSelfEmployedIncome + egenavgifter.deduction, "down");
-	const grundAvdrag = getGrundavdrag(earnedIncome, d.prisbasbelopp);
-	const taxableIncome = earnedIncome + grundAvdrag;
-
-	const pension = getPension(d.inkomstbasbelopp, salary, activeIncome);
-
-	const municipalIncomeTax = getAmountByPercentage(taxableIncome, d.municipalIncomeTaxRate) * -1;
-	const capitalIncomeTax = getAmountByPercentage(capitalIncome, d.capitalIncomeTaxRate) * -1;
-
-	const funeralTax = getAmountByPercentage(taxableIncome, d.funeralTaxRate) * -1;
-	const showPublicServiceTax = d.publicServiceTax.rate > 0;
-	const publicServiceTax = getAmountWithLimit(taxableIncome, d.publicServiceTax.rate, d.publicServiceTax.limit) * -1;
-	const totalTax = municipalIncomeTax + pension.taxEmployed + pension.taxOther + egenavgifter.total + funeralTax + publicServiceTax;
-
-	const employmentTaxDeduction = getJobbskatteavdrag(activeIncome, grundAvdrag, municipalIncomeTax, d);
-	const totalFinalTax = totalTax + employmentTaxDeduction + capitalIncomeTax;
-	const totalFinalTaxRate = -100 * totalFinalTax / (salary + activeIncome + passiveIncome + capitalIncome);
-
-	return {
-		egenavgiftDeduction: egenavgifter.deduction,
-		earnedIncome,
-		grundAvdrag,
-		taxableIncome,
-		pensionableEmploymentIncome: pension.employmentIncome,
-		pensionableOtherIncome:pension.otherIncome,
-		municipalIncomeTax,
-		capitalIncomeTax,
-		healthInsuranceTax: egenavgifter.healthInsuranceTax,
-		parentalInsuranceTax: egenavgifter. parentalInsuranceTax,
-		retirementPensionTax: egenavgifter.retirementPensionTax,
-		survivorsPensionContribution: egenavgifter.survivorsPensionContribution,
-		labourMarketTax: egenavgifter.labourMarketTax,
-		occupationalInjuryTax: egenavgifter.occupationalInjuryTax,
-		generalPayrollTax: egenavgifter.generalPayrollTax,
-		reductionForActiveBusiness: egenavgifter.reductionForActiveBusiness,
-		totalEgenavgifter: egenavgifter.total,
-		pensionTaxEmployed: pension.taxEmployed,
-		pensionTaxOther: pension.taxOther,
-		funeralTax,
-		showPublicServiceTax,
-		publicServiceTax,
-		totalTax,
-		employmentTaxDeduction,
-		totalFinalTax,
-		totalFinalTaxRate,
 	};
 }

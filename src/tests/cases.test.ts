@@ -1,4 +1,4 @@
-import { calculateNew } from "~/lib/calculations";
+import { calculate } from "~/lib/calculations";
 import * as data from "~/lib/data.json";
 import * as tests from "./test.data.json";
 
@@ -12,7 +12,7 @@ describe("cases", () => {
 				return;
 			}
 			const d = data[t.year as Year];
-			const c = calculateNew(t.incomeDetails, d);
+			const c = calculate(t.incomeDetails, d);
 
 			expect(c.income.earnedIncome).toEqualInteger(t.taxDetails.income.earnedIncome);
 			expect(c.income.grundAvdrag).toEqualInteger(t.taxDetails.income.grundAvdrag);

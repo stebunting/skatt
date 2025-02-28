@@ -27,14 +27,26 @@ export default function Calculator(props: Props): React.ReactElement {
 			<div className={s.group}>
 				<Input
 					id="salary"
-					label="Income from Salary, Benefits, Sick Pay etc."
+					label="Salary"
 					value={formInput.salary}
+					onChange={handleValueChange}
+				/>
+				<Input
+					id="benefits"
+					label="Income from Benefits, Sick Pay etc."
+					value={formInput.benefits}
 					onChange={handleValueChange}
 				/>
 				<Input
 					id="capitalIncome"
 					label="Capital Income"
 					value={formInput.capitalIncome}
+					onChange={handleValueChange}
+				/>
+				<Input
+					id="capitalExpenses"
+					label="Capital Expenses"
+					value={formInput.capitalExpenses}
 					onChange={handleValueChange}
 				/>
 			</div>
@@ -53,6 +65,12 @@ export default function Calculator(props: Props): React.ReactElement {
 					onChange={handleValueChange}
 				/>
 				<Input
+					id="deductibles"
+					label="Deductibles"
+					value={formInput.deductibles}
+					onChange={handleValueChange}
+				/>
+				<Input
 					id="previousClaimedEgenavgift"
 					label="Previous Claimed Egenavgift"
 					value={formInput.previousClaimedEgenavgift}
@@ -65,9 +83,27 @@ export default function Calculator(props: Props): React.ReactElement {
 					onChange={handleValueChange}
 				/>
 				<Input
+					id="interestDistribution"
+					label="Interest Distribution"
+					value={formInput.interestDistribution}
+					onChange={handleValueChange}
+				/>
+				<Input
 					id="egenavgiftDeduction"
 					label="Egenavgift Deduction"
-					value={calculatedValues.egenavgiftDeduction}
+					value={calculatedValues.taxes.egenavgifter.deduction}
+				/>
+				<Input
+					id="rutArbete"
+					label="Rut/Rot Work"
+					value={formInput.rutArbete}
+					onChange={handleValueChange}
+				/>
+				<Input
+					id="selfEmployedSickPay"
+					label="Self Employed Sick Pay"
+					value={formInput.selfEmployedSickPay}
+					onChange={handleValueChange}
 				/>
 			</div>
 
@@ -75,17 +111,17 @@ export default function Calculator(props: Props): React.ReactElement {
 				<Input
 					id="earnedIncome"
 					label="Earned Income"
-					value={calculatedValues.earnedIncome}
+					value={calculatedValues.income.earnedIncome}
 				/>
 				<Input
 					id="grundAvdrag"
 					label="Grundavdrag"
-					value={calculatedValues.grundAvdrag}
+					value={calculatedValues.income.grundAvdrag}
 				/>
 				<Input
 					id="taxableIncome"
 					label="Taxable Income"
-					value={calculatedValues.taxableIncome}
+					value={calculatedValues.income.taxableEarnedIncome}
 				/>
 			</div>
 
@@ -94,12 +130,12 @@ export default function Calculator(props: Props): React.ReactElement {
 				<Input
 					id="pensionableEmploymentIncome"
 					label="Employment Income"
-					value={calculatedValues.pensionableEmploymentIncome}
+					value={calculatedValues.income.pensionable.employment}
 				/>
 				<Input
 					id="pensionableOtherIncome"
 					label="Other Income"
-					value={calculatedValues.pensionableOtherIncome}
+					value={calculatedValues.income.pensionable.other}
 				/>
 			</div>
 
@@ -108,13 +144,18 @@ export default function Calculator(props: Props): React.ReactElement {
 				<Input
 					id="municipalIncomeTax"
 					label="Municipal Income Tax"
-					value={calculatedValues.municipalIncomeTax}
+					value={calculatedValues.taxes.municipalIncomeTax}
 				/>
-				{calculatedValues.capitalIncomeTax < 0 && (
+				<Input
+					id="stateIncomeTax"
+					label="State Income Tax"
+					value={calculatedValues.taxes.stateIncomeTax}
+				/>
+				{calculatedValues.taxes.stateCapitalTax < 0 && (
 					<Input
 						id="capitalIncomeTax"
 						label="Capital Income Tax"
-						value={calculatedValues.capitalIncomeTax}
+						value={calculatedValues.taxes.stateCapitalTax}
 					/>
 				)}
 			</div>
@@ -124,55 +165,55 @@ export default function Calculator(props: Props): React.ReactElement {
 				<Input
 					id="healthInsuranceTax"
 					label="Health Insurance Tax"
-					value={calculatedValues.healthInsuranceTax}
+					value={calculatedValues.taxes.egenavgifter.healthInsuranceTax}
 					subCalculation
 				/>
 				<Input
 					id="parentalInsuranceTax"
 					label="Parental Insurance Tax"
-					value={calculatedValues.parentalInsuranceTax}
+					value={calculatedValues.taxes.egenavgifter.parentalInsuranceTax}
 					subCalculation
 				/>
 				<Input
 					id="retirementPensionTax"
 					label="Retirement Pension Tax"
-					value={calculatedValues.retirementPensionTax}
+					value={calculatedValues.taxes.egenavgifter.retirementPensionTax}
 					subCalculation
 				/>
 				<Input
 					id="survivorsPensionContribution"
 					label="Survivors Pension Contribution"
-					value={calculatedValues.survivorsPensionContribution}
+					value={calculatedValues.taxes.egenavgifter.survivorsPensionContribution}
 					subCalculation
 				/>
 				<Input
 					id="labourMarketTax"
 					label="Labour Market Tax"
-					value={calculatedValues.labourMarketTax}
+					value={calculatedValues.taxes.egenavgifter.labourMarketTax}
 					subCalculation
 				/>
 				<Input
 					id="occupationalInjuryTax"
 					label="Occupational Injury Tax"
-					value={calculatedValues.occupationalInjuryTax}
+					value={calculatedValues.taxes.egenavgifter.occupationalInjuryTax}
 					subCalculation
 				/>
 				<Input
 					id="generalPayrollTax"
 					label="General Payroll Tax"
-					value={calculatedValues.generalPayrollTax}
+					value={calculatedValues.taxes.egenavgifter.generalPayrollTax}
 					subCalculation
 				/>
 				<Input
 					id="reductionForActiveBusiness"
 					label="Reduction for Active Business"
-					value={calculatedValues.reductionForActiveBusiness}
+					value={calculatedValues.taxes.egenavgifter.reductionForActiveBusiness}
 					subCalculation
 				/>
 				<Input
 					id="totalEgenavgifter"
 					label="Total"
-					value={calculatedValues.totalEgenavgifter}
+					value={calculatedValues.taxes.egenavgifter.total}
 				/>
 			</div>
 
@@ -180,23 +221,23 @@ export default function Calculator(props: Props): React.ReactElement {
 				<Input
 					id="pensionTaxEmployed"
 					label="Pensions Tax (Employment)"
-					value={calculatedValues.pensionTaxEmployed}
+					value={calculatedValues.taxes.pensionContribution.income}
 				/>
 				<Input
 					id="pensionTaxOther"
 					label="Pensions Tax (Other)"
-					value={calculatedValues.pensionTaxOther}
+					value={calculatedValues.taxes.pensionContribution.other}
 				/>
 				<Input
 					id="funeralTax"
 					label="Funeral Tax"
-					value={calculatedValues.funeralTax}
+					value={calculatedValues.taxes.funeralFee}
 				/>
-				{calculatedValues.showPublicServiceTax && (
+				{calculatedValues.taxes.publicServiceFee && (
 					<Input
 						id="publicServiceTax"
 						label="Public Service Tax"
-						value={calculatedValues.publicServiceTax}
+						value={calculatedValues.taxes.publicServiceFee}
 					/>
 				)}
 			</div>
@@ -205,38 +246,60 @@ export default function Calculator(props: Props): React.ReactElement {
 				<Input
 					id="totalTax"
 					label="Total"
-					value={calculatedValues.totalTax}
+					value={calculatedValues.taxes.total}
 				/>
 			</div>
 
 			<h2>Reductions</h2>
 			<div className={s.group}>
 				<Input
+					id="pensionTaxDeduction"
+					label="Pension Contribution Deduction"
+					value={calculatedValues.taxReductions.pensionContribution}
+				/>
+				<Input
 					id="employmentTaxDeduction"
 					label="Employment Tax Deduction (Jobbskatteavdrag)"
-					value={calculatedValues.employmentTaxDeduction}
+					value={calculatedValues.taxReductions.jobbSkatteAvdrag}
 				/>
-				{calculatedValues.capitalIncomeTax > 0 && (
+				<Input
+					id="taxableEarnedIncomeReduction"
+					label="Taxable Earned Income Reduction"
+					value={calculatedValues.taxReductions.taxableEarnedIncomeReduction}
+				/>
+				{calculatedValues.taxReductions.capitalDeficitReduction > 0 && (
 					<Input
 						id="capitalIncomeTax"
 						label="Capital Tax Deficit"
-						value={calculatedValues.capitalIncomeTax}
+						value={calculatedValues.taxReductions.capitalDeficitReduction}
 					/>
 				)}
+				{calculatedValues.taxReductions.rutArbete > 0 && (
+					<Input
+						id="rutArbete"
+						label="Rot/Rut Work"
+						value={calculatedValues.taxReductions.rutArbete}
+					/>
+				)}
+				<Input
+					id="totalTaxReductions"
+					label="Total Reductions"
+					value={calculatedValues.taxReductions.total}
+				/>
 			</div>
 
 			<div className={s.group}>
 				<Input
 					id="totalFinalTax"
 					label="Total Final Tax"
-					value={calculatedValues.totalFinalTax}
+					value={calculatedValues.finalTax}
 				/>
-				<Input
+				{/* <Input
 					id="totalFinalTaxRate"
 					label="Total Final Tax Rate"
 					value={calculatedValues.totalFinalTaxRate}
 					symbol="%"
-				/>
+				/> */}
 			</div>
 		</div>
 	);
