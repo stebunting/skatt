@@ -1,18 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { calculate } from "~/lib/calculations";
+import { calculate, IncomeDetails } from "~/lib/calculations";
 import { Year } from "~/typings/global";
 import data from "~/lib/data.json";
 
-
-export interface FormInput {
-	salary: number;
-	activeIncome: number;
-	passiveIncome: number;
-	previousClaimedEgenavgift: number;
-	previousEgenavgift: number;
-	capitalIncome: number;
-}
 
 export interface CalculatedValues {
 	egenavgiftDeduction: number;
@@ -48,13 +39,20 @@ export interface CalculatedValues {
 }
 
 export function useCalculator(initialYear: Year) {
-	const [formInput, setFormInput] = useState<FormInput>({
-		salary: 392349,
-		activeIncome: 401706,
-		passiveIncome: -53286,
-		previousClaimedEgenavgift: 49869,
-		previousEgenavgift: 35592,
-		capitalIncome: -23394,
+	const [formInput, setIncomeDetails] = useState<IncomeDetails>({
+		salary: 0,
+		benefits: 0,
+		activeIncome: 0,
+		passiveIncome: 0,
+		deductibles: 0,
+		selfEmployedSickPay: 0,
+		previousClaimedEgenavgift: 0,
+		previousEgenavgift: 0,
+		interestDistribution: 0,
+		periodiseringFond: 0,
+		capitalIncome: 0,
+		capitalExpenses: 0,
+		rutArbete: 0,
 	});
 	const [calculatedValues, setCalculatedValues] = useState<CalculatedValues>({
 		egenavgiftDeduction: 0,
@@ -103,7 +101,7 @@ export function useCalculator(initialYear: Year) {
 			? parseInt(valueStr.replace(/ /g, ""), 10)
 			: 0;
 		if (!Number.isNaN(value)) {
-			setFormInput({ ...formInput, [id]: value });
+			setIncomeDetails({ ...formInput, [id]: value });
 		}
 	};
 

@@ -3,7 +3,7 @@ import { Year } from "~/typings/global";
 
 import data from "~/lib/data.json";
 import { formatNumber } from "~/lib/format";
-import { roundHundred } from "~/lib/calculations";
+import { round } from "~/lib/calculations";
 
 
 interface Props {
@@ -22,7 +22,7 @@ export default function Overview(props: Props): React.ReactElement {
 			</div>
 			<div>
 				<strong>Inkomstbasbelopp: </strong>
-				{formatNumber(d.inkomstbasbelopp)} kr
+				{formatNumber(d.pgi.inkomstbasbelopp)} kr
 			</div>
 			<div>
 				<strong>Municipal Income Tax Rate: </strong>
@@ -36,11 +36,11 @@ export default function Overview(props: Props): React.ReactElement {
 			<h2>Pension</h2>
 			<div>
 				<strong>Maximum Pensionable Income: </strong>
-				{formatNumber(d.inkomstbasbelopp * 7.5)} kr
+				{formatNumber(d.pgi.inkomstbasbelopp * 7.5)} kr
 			</div>
 			<div>
 				<strong>Maximum Pension Tax: </strong>
-				{formatNumber(roundHundred(d.inkomstbasbelopp * (7.5 / 0.93) * 0.07))} kr
+				{formatNumber(round(d.pgi.inkomstbasbelopp * (7.5 / 0.93) * 0.07, 100))} kr
 			</div>
 
 			<h2>Egenavgift</h2>

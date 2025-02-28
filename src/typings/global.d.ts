@@ -1,8 +1,11 @@
+import { IncomeDetails, TaxDetails } from "~/lib/calculations";
+
 export interface DataPayload {
-	schablonavdrag: number;
+	schablonavdrag: SchablonAvdrag;
 	prisbasbelopp: number;
-	inkomstbasbelopp: number;
+	pgi: PGILimits;
 	municipalIncomeTaxRate: number;
+	stateIncomeTax: StateIncomeTaxThreshold;
 	capitalIncomeTaxRate: number;
 	deductibles: {
 		healthInsuranceTaxRate: number;
@@ -12,27 +15,66 @@ export interface DataPayload {
 		labourMarketTaxRate: number;
 		occupationalInjuryTaxRate: number;
 		generalPayrollTaxRate: number;
-	},
+	};
 	reductionForActiveBusiness: {
 		rate: number;
 		limit: number;
-	},
+	};
 	funeralTaxRate: number,
 	publicServiceTax: {
 			rate: number;
 			limit: number;
-	},
+	};
+	taxableEarnedIncomeReduction: TaxableEarnedIncomeReduction,
 	jobbSkatteavdragRate: {
 		breakpoints: Array<number>;
 		rate: Array<number>;
 		prisbasbeloppAmount: Array<number>;
-	},
+	};
+	capitalDeficit: CapitalDeficit,
+}
+
+export interface PGILimits {
+	inkomstbasbelopp: number;
+	incomeCeilingRounding: number;
+}
+
+export interface SchablonAvdrag {
+	rate: number;
+	limit: number;
+	remainingRate: number;
+}
+
+export type StateIncomeTaxThreshold = Array<{
+	rate: number;
+	threshold: number;
+}>
+
+export interface TaxableEarnedIncomeReduction {
+	rate: number;
+	threshold: number;
+	limit: number;
+}
+
+export interface CapitalDeficit {
+	rate: number;
+	limit: number;
+	remainingRate: number;
 }
 
 export type Year = "2016" | "2017" | "2018" | "2019" | "2020" | "2021" | "2022" | "2023" | "2024";
 
 declare module "data.json" {
 	const value: Record<Year, DataPayload>;
+	export default value;
+}
+
+declare module "test.data.json" {
+	const value: Array<{
+		year: Year;
+		incomeDetails: IncomeDetails;
+		taxDetails: TaxDetails;
+	}>;
 	export default value;
 }
 

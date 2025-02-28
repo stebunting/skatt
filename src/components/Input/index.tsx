@@ -2,14 +2,15 @@ import React from "react";
 
 import { classes } from "~/lib/classes";
 import { formatNumber } from "~/lib/format";
-import { CalculatedValues, FormInput } from "~/views/IndexView/Calculator/useCalculator";
+import { IncomeDetails } from "~/lib/calculations";
+import { CalculatedValues } from "~/views/IndexView/Calculator/useCalculator";
 
 import s from "./style.module.scss";
 
 
 interface InputProps {
 	label: string;
-	id: keyof FormInput;
+	id: keyof IncomeDetails;
 	value: number;
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

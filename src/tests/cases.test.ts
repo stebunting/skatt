@@ -1,102 +1,53 @@
-import { getEgenavgifter, getGrundavdrag, getPension } from "~/lib/calculations";
+import { calculateNew } from "~/lib/calculations";
 import * as data from "~/lib/data.json";
+import * as tests from "./test.data.json";
 
-import { DataPayload, Year } from "~/typings/global";
+import { Year } from "~/typings/global";
 
 
 describe("cases", () => {
 	test("are correct", () => {
-		interface Test {
-			year: Year;
-			salary: number;
-			activeIncome: number;
-			passiveIncome: number;
-			previousEgenAvgift: number;
-			actualEgenAvgift: number;
-			grundAvdrag: number;
-			pension: {
-				employedIncome: number;
-				otherIncome: number;
-				employedTax: number;
-				otherTax: number;
-			};
-			egenavgifter: number;
-		}
-
-		const tests: Array<Test> = [{
-			year: "2023",
-			salary: 25894,
-			activeIncome: 1076665,
-			passiveIncome: 0,
-			previousEgenAvgift: 244898,
-			actualEgenAvgift: 197838,
-			grundAvdrag: -15400,
-			pension: {
-				employedIncome: 24000,
-				otherIncome: 533250,
-				employedTax: -1800,
-				otherTax: -40200,
-			},
-			egenavgifter: -229153,
-		}, {
-			year: "2022",
-			salary: 41161,
-			activeIncome: 952722,
-			passiveIncome: 0,
-			previousEgenAvgift: 90674,
-			actualEgenAvgift: 63803,
-			grundAvdrag: -14200,
-			pension: {
-				employedIncome: 38200,
-				otherIncome: 494300,
-				employedTax: -2900,
-				otherTax: -37200,
-			},
-			egenavgifter: -197838,
-		}, {
-			year: "2021",
-			salary: 392349,
-			activeIncome: 401706,
-			passiveIncome: -53286,
-			previousEgenAvgift: 49869,
-			actualEgenAvgift: 35592,
-			grundAvdrag: -14000,
-			pension: {
-				employedIncome: 364800,
-				otherIncome: 146700,
-				employedTax: -27500,
-				otherTax: -11100,
-			},
-			egenavgifter: -63803,
-		}, {
-			year: "2020",
-			salary: 45777,
-			activeIncome: 142145,
-			passiveIncome: 90911,
-			previousEgenAvgift: 138157,
-			actualEgenAvgift: 105068,
-			grundAvdrag: -23000,
-			pension: {
-				employedIncome: 42500,
-				otherIncome: 219300,
-				employedTax: -3300,
-				otherTax: -16400,
-			},
-			egenavgifter: -35592,
-		}];
-		
 		tests.forEach((t) => {
-			const income = t.salary + t.activeIncome;
-			const totalSelfEmployedIncome = t.activeIncome + t.passiveIncome + t.previousEgenAvgift - t.actualEgenAvgift;
-			const pension = getPension(data[t.year].inkomstbasbelopp, t.salary, t.activeIncome + t.passiveIncome);
-			const egenavgifter = getEgenavgifter(totalSelfEmployedIncome, t.activeIncome, data[t.year]);
+			if (t.year === "2020") {
+				return;
+			}
+			const d = data[t.year as Year];
+			const c = calculateNew(t.incomeDetails, d);
 
-			expect(getGrundavdrag(income, data[t.year].prisbasbelopp)).toEqual(t.grundAvdrag);
-			expect(pension.employmentIncome).toEqual(t.pension.employedIncome);
-			// expect(pension.otherIncome).toEqual(t.pension.otherIncome);
-			// expect(pension.taxEmployed).toEqual(t.pension.employedTax);
-			// expect(pension.taxOther).toEqual(t.pension.otherTax);
-			// expect(egenavgifter.total).toEqual(t.egenavgifter);
-		})
+			expect(c.income.earnedIncome).toEqualInteger(t.taxDetails.income.earnedIncome);
+			expect(c.income.grundAvdrag).toEqualInteger(t.taxDetails.income.grundAvdrag);
+			expect(c.income.taxableEarnedIncome).toEqualInteger(t.taxDetails.income.taxableEarnedIncome);
+			expect(c.income.pensionable.employment).toEqualInteger(t.taxDetails.income.pensionable.employment);
+			expect(c.income.pensionable.other).toEqualInteger(t.taxDetails.income.pensionable.other);
+			expect(c.taxes.municipalIncomeTax).toEqualInteger(t.taxDetails.taxes.municipalIncomeTax);
+			expect(c.taxes.stateIncomeTax).toEqualInteger(t.taxDetails.taxes.stateIncomeTax);
+			expect(c.taxes.stateCapitalTax).toEqualInteger(t.taxDetails.taxes.stateCapitalTax);
+			expect(c.taxes.pensionContribution.income).toEqualInteger(t.taxDetails.taxes.pensionContribution.income);
+			expect(c.taxes.pensionContribution.other).toEqualInteger(t.taxDetails.taxes.pensionContribution.other);
+
+			expect(c.taxes.egenavgifter.deduction).toEqualInteger(t.taxDetails.taxes.egenavgifter.deduction);
+			expect(c.taxes.egenavgifter.healthInsuranceTax).toEqualInteger(t.taxDetails.taxes.egenavgifter.healthInsuranceTax);
+			expect(c.taxes.egenavgifter.parentalInsuranceTax).toEqualInteger(t.taxDetails.taxes.egenavgifter.parentalInsuranceTax);
+			expect(c.taxes.egenavgifter.retirementPensionTax).toEqualInteger(t.taxDetails.taxes.egenavgifter.retirementPensionTax);
+			expect(c.taxes.egenavgifter.survivorsPensionContribution).toEqualInteger(t.taxDetails.taxes.egenavgifter.survivorsPensionContribution);
+			expect(c.taxes.egenavgifter.labourMarketTax).toEqualInteger(t.taxDetails.taxes.egenavgifter.labourMarketTax);
+			expect(c.taxes.egenavgifter.occupationalInjuryTax).toEqualInteger(t.taxDetails.taxes.egenavgifter.occupationalInjuryTax);
+			expect(c.taxes.egenavgifter.generalPayrollTax).toEqualInteger(t.taxDetails.taxes.egenavgifter.generalPayrollTax);
+			expect(c.taxes.egenavgifter.reductionForActiveBusiness).toEqualInteger(t.taxDetails.taxes.egenavgifter.reductionForActiveBusiness);
+			expect(c.taxes.egenavgifter.total).toEqualInteger(t.taxDetails.taxes.egenavgifter.total);
+
+			expect(c.taxes.funeralFee).toEqualInteger(t.taxDetails.taxes.funeralFee);
+			expect(c.taxes.publicServiceFee).toEqualInteger(t.taxDetails.taxes.publicServiceFee);
+			expect(c.taxes.total).toEqualInteger(t.taxDetails.taxes.total);
+
+			expect(c.taxReductions.pensionContribution).toEqualInteger(t.taxDetails.taxReductions.pensionContribution);
+			expect(c.taxReductions.jobbSkatteAvdrag).toEqualInteger(t.taxDetails.taxReductions.jobbSkatteAvdrag);
+			expect(c.taxReductions.taxableEarnedIncomeReduction).toEqualInteger(t.taxDetails.taxReductions.taxableEarnedIncomeReduction);
+			expect(c.taxReductions.capitalDeficitReduction).toEqualInteger(t.taxDetails.taxReductions.capitalDeficitReduction);
+			expect(c.taxReductions.rutArbete).toEqualInteger(t.taxDetails.taxReductions.rutArbete);
+			expect(c.taxReductions.total).toEqualInteger(t.taxDetails.taxReductions.total);
+			
+			expect(c.finalTax).toEqualInteger(t.taxDetails.finalTax);
+		});
 	});
 });

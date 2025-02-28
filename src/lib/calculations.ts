@@ -1,5 +1,4 @@
-import { DataPayload } from "~/typings/global";
-import { FormInput } from "~/views/IndexView/Calculator/useCalculator";
+import { CapitalDeficit, DataPayload, PGILimits, StateIncomeTaxThreshold, TaxableEarnedIncomeReduction } from "~/typings/global";
 
 export function getAmountByPercentage(
 	gross: number,
@@ -9,48 +8,40 @@ export function getAmountByPercentage(
 	return amount > 0 ? Math.floor(amount) : Math.ceil(amount);
 }
 
-interface PensionReturnPayload {
+export interface PensionReturnPayload {
 	employmentIncome: number;
 	otherIncome: number;
 	taxEmployed: number;
 	taxOther: number;
 }
 
-export function getPension(
-	inkomstbasbelopp: number,
+export function getPGI(
+	pgiLimits: PGILimits,
 	salary: number,
 	activeIncome: number,
 ): PensionReturnPayload {
-	let availablePGI = inkomstbasbelopp * 7.5;
-	let availablePensionTax = roundHundred(inkomstbasbelopp * (7.5 / 0.93) * -0.07, "down");
+	let availablePGI = 7.5 * pgiLimits.inkomstbasbelopp;
+	let availableIncome = round(pgiLimits.inkomstbasbelopp * 8.07, pgiLimits.incomeCeilingRounding);
 
-	let taxEmployed = roundHundred(salary * -0.07);
-	if (taxEmployed < availablePensionTax) {
-		taxEmployed = availablePensionTax;
-	}
-	availablePensionTax -= taxEmployed;
+	// Round incomes down to nearest hundred and apply limits
+	salary = round(Math.min(salary, availableIncome), 100, "down");
+	availableIncome -= salary;
+	activeIncome = round(Math.min(activeIncome, availableIncome), 100, "down");
 
-	let taxOther = roundHundred(activeIncome * -0.07);
-	if (taxOther < availablePensionTax) {
-		taxOther = availablePensionTax;
-	}
+	// Calculate taxes
+	const taxEmployed = round(salary * -0.07, 100);
+	const taxOther = round(activeIncome * -0.07, 100);
 
-	let employmentIncome = roundHundred(salary - (salary * 0.07), "down");
-	if (employmentIncome > availablePGI) {
-		employmentIncome = availablePGI;
-	}
+	// Calculate PGI
+	const employmentIncome = Math.min(salary + taxEmployed, availablePGI);
 	availablePGI -= employmentIncome;
-
-	let otherIncome = roundHundred(activeIncome - (activeIncome * 0.07), "down");
-	if (otherIncome > availablePGI) {
-		otherIncome = availablePGI;
-	}
+	const otherIncome = Math.min(activeIncome + taxOther, availablePGI);
 
 	return {
-		taxEmployed,
-		taxOther,
 		employmentIncome,
 		otherIncome,
+		taxEmployed,
+		taxOther,
 	};
 }
 
@@ -98,7 +89,9 @@ export function getEgenavgifter(
 	activeIncome: number,
 	d: DataPayload,
 ): EgenAvgiftReturnPayload {
-	const egenavgiftDeduction = getAmountByPercentage(totalSelfEmployedIncome, d.schablonavdrag) * -1;
+	const egenavgiftDeduction = totalSelfEmployedIncome > d.schablonavdrag.limit
+		? (getAmountByPercentage(d.schablonavdrag.limit, d.schablonavdrag.rate) + getAmountByPercentage(totalSelfEmployedIncome - d.schablonavdrag.limit, d.schablonavdrag.remainingRate)) * -1
+		: getAmountByPercentage(totalSelfEmployedIncome, d.schablonavdrag.rate) * -1;
 	const egenavgiftIncome = totalSelfEmployedIncome + egenavgiftDeduction;
 
 	const e = {
@@ -131,6 +124,7 @@ export function getAmountWithLimit(
 export function getJobbskatteavdrag(
 	income: number,
 	grundavdrag: number,
+	municipalIncomeTax: number,
 	data: DataPayload,
 ): number {
 	const {
@@ -138,8 +132,9 @@ export function getJobbskatteavdrag(
 		prisbasbelopp,
 		municipalIncomeTaxRate,
 	} = data;
-
 	let amount: number;
+	income = round(income, 100, "down");
+
 	if (income <= prisbasbelopp * rates.breakpoints[0]) {
 		amount = (income + grundavdrag) * municipalIncomeTaxRate / 100;
 
@@ -156,23 +151,211 @@ export function getJobbskatteavdrag(
 		amount = ((rates.prisbasbeloppAmount[3] * prisbasbelopp + grundavdrag) * municipalIncomeTaxRate / 100) - (0.03 * (income - 13.54 * prisbasbelopp));
 	}
 
-	return Math.round(amount);
+	return Math.floor(amount < municipalIncomeTax * -1 ? amount : municipalIncomeTax * -1);
 }
 
-export function roundHundred(
+export function round(
 	n: number,
+	multiple: number,
 	direction?: "up" | "down",
 ) {
 	if (direction === "up") {
-		return Math.ceil(n / 100) * 100;
+		return Math.ceil(n / multiple) * multiple;
 	} else if (direction === "down") {
-		return Math.floor(n / 100) * 100;
+		return Math.floor(n / multiple) * multiple;
 	}
 
-	return Math.round(n / 100) * 100;
+	return Math.round(n / multiple) * multiple;
 }
 
-export function calculate(formInput: FormInput, d: DataPayload) {
+function getStateIncomeTax(income: number, rates: StateIncomeTaxThreshold): number {
+	let tax = 0;
+
+	for (let i = 0; i < rates.length; i++) {
+		if (income > rates[i].threshold) {
+			const low = rates[i].threshold;
+			let high = income;
+
+			if (rates.length > i + 1 && income > rates[i + 1].threshold) {
+				high = rates[i + 1].threshold;
+			}
+
+			tax += getAmountByPercentage(high - low, rates[i].rate) * -1;
+		}
+	}
+
+	return tax;
+}
+
+function getTaxableEarnedIncomeReduction(income: number, rate: TaxableEarnedIncomeReduction) {
+	return income < rate.threshold
+		? 0
+		: getAmountWithLimit(income - rate.threshold, rate.rate, rate.limit);
+}
+
+export interface IncomeDetails {
+	salary: number;
+	benefits: number;
+	activeIncome: number;
+	passiveIncome: number;
+	deductibles: number;
+	selfEmployedSickPay: number;
+	previousClaimedEgenavgift: number;
+	previousEgenavgift: number;
+	interestDistribution: number;
+	periodiseringFond: number;
+	capitalIncome: number;
+	capitalExpenses: number;
+	rutArbete: number;
+}
+
+export interface TaxDetails {
+	income: {
+		earnedIncome: number;
+		grundAvdrag: number;
+		taxableEarnedIncome: number;
+		pensionable: {
+			employment: number;
+			other: number;
+		}
+	}
+	taxes: {
+		municipalIncomeTax: number;
+		stateIncomeTax: number;
+		stateCapitalTax: number;
+		pensionContribution: {
+			income: number;
+			other: number;
+		}
+		egenavgifter: EgenAvgiftReturnPayload;
+		funeralFee: number;
+		publicServiceFee: number;
+		total: number;
+	},
+	taxReductions: {
+		pensionContribution: number;
+		jobbSkatteAvdrag: number;
+		taxableEarnedIncomeReduction: number;
+		capitalDeficitReduction: number;
+		rutArbete: number;
+		total: number;
+	},
+	finalTax: number;
+}
+
+export function getCapitalDeficit(amount: number, rate: CapitalDeficit) {
+	if (amount > 0) {
+		return 0;
+	}
+
+	return amount > rate.limit * -1
+		? getAmountByPercentage(amount, rate.rate) * -1
+		: getAmountByPercentage(rate.limit, rate.rate) + getAmountByPercentage(amount + rate.limit, rate.remainingRate * -1);
+}
+
+export function calculateNew(i: IncomeDetails, d: DataPayload): TaxDetails {
+	// Capital Gain/Loss
+	const capitalTotal = i.capitalIncome + i.interestDistribution - i.capitalExpenses;
+	const stateCapitalTax = capitalTotal > 0
+		? getAmountByPercentage(capitalTotal, d.capitalIncomeTaxRate) * -1
+		: 0;
+	let capitalDeficitReduction = getCapitalDeficit(capitalTotal, d.capitalDeficit);
+
+	// Egenavgifter
+	const totalSelfEmployedIncome = i.activeIncome - i.deductibles + i.passiveIncome - i.interestDistribution + i.periodiseringFond + i.previousClaimedEgenavgift - i.previousEgenavgift;
+	const egenavgifter = getEgenavgifter(totalSelfEmployedIncome, i.activeIncome, d);
+	const activeBusinessSurplus = totalSelfEmployedIncome + egenavgifter.deduction;
+
+	// Fastställd förvärvsinkomst
+	// Salary + self employed income - egenavgift deduction (25%)
+	const earnedIncome = round(i.salary + i.benefits + activeBusinessSurplus + i.selfEmployedSickPay, 100, "down");
+
+	// varav beskattningsbar förvärvsinkomst
+	// Taxable Income (earned income minus grundavdrag)
+	const grundAvdrag = getGrundavdrag(earnedIncome, d.prisbasbelopp);
+	const taxableEarnedIncome = earnedIncome + grundAvdrag;
+
+	// Pensionsgrundande inkomst
+	// Pensionable income for employment and for other gainful employment
+	const pension = getPGI(d.pgi, i.salary + i.benefits, activeBusinessSurplus);
+
+	// Kommunal inkomstskatt
+	// Municipal Income Tax
+	const municipalIncomeTax = getAmountByPercentage(taxableEarnedIncome, d.municipalIncomeTaxRate) * -1;
+
+	// Statlig inkomstskatt på förvärvsinkomster
+	// State Income Tax
+	const stateIncomeTax = getStateIncomeTax(taxableEarnedIncome, d.stateIncomeTax);
+
+	// Begravningsavgift
+	// Funeral Fee
+	const funeralFee = getAmountByPercentage(taxableEarnedIncome, d.funeralTaxRate) * -1;
+
+	// Public service avgift
+	// Radio and TV fee
+	const publicServiceFee = getAmountWithLimit(taxableEarnedIncome, d.publicServiceTax.rate, d.publicServiceTax.limit) * -1;
+
+	// Tax Total
+	const taxTotal = municipalIncomeTax + stateIncomeTax + stateCapitalTax + pension.taxEmployed + pension.taxOther + egenavgifter.total + funeralFee + publicServiceFee;
+
+	let avilableTaxReduction = municipalIncomeTax * -1 + pension.taxEmployed + pension.otherIncome;
+	if (capitalDeficitReduction > avilableTaxReduction) {
+		capitalDeficitReduction = avilableTaxReduction;
+	}
+	avilableTaxReduction -= capitalDeficitReduction;
+
+	// Taxable Earned Income Reduction
+	const taxableEarnedIncomeReduction = getTaxableEarnedIncomeReduction(taxableEarnedIncome, d.taxableEarnedIncomeReduction);
+
+	// Reduction in Municipal Income Tax
+	let jobbSkatteAvdrag = getJobbskatteavdrag(i.salary + totalSelfEmployedIncome + egenavgifter.deduction, grundAvdrag, municipalIncomeTax, d);
+	if (jobbSkatteAvdrag * -1 > avilableTaxReduction) {
+		jobbSkatteAvdrag = avilableTaxReduction;
+	}
+	avilableTaxReduction -= capitalDeficitReduction;
+
+	// Tax Reduction Total
+	const totalTaxReductions = jobbSkatteAvdrag - pension.taxEmployed - pension.taxOther + taxableEarnedIncomeReduction + capitalDeficitReduction + i.rutArbete;
+
+	// Bottom Line Tax
+	const finalTax = taxTotal + totalTaxReductions;
+
+	return {
+		income: {
+			earnedIncome,
+			grundAvdrag,
+			taxableEarnedIncome,
+			pensionable: {
+				employment: pension.employmentIncome,
+				other: pension.otherIncome,
+			},
+		},
+		taxes: {
+			municipalIncomeTax,
+			stateIncomeTax,
+			stateCapitalTax,
+			pensionContribution: {
+				income: pension.taxEmployed,
+				other: pension.taxOther,
+			},
+			egenavgifter,
+			funeralFee,
+			publicServiceFee,
+			total: taxTotal,
+		},
+		taxReductions: {
+			pensionContribution: (pension.taxEmployed + pension.taxOther) * -1,
+			jobbSkatteAvdrag,
+			taxableEarnedIncomeReduction,
+			capitalDeficitReduction,
+			rutArbete: i.rutArbete,
+			total: totalTaxReductions,
+		},
+		finalTax,
+	};
+}
+
+export function calculate(formInput: IncomeDetails, d: DataPayload) {
 	const { salary, activeIncome, passiveIncome, capitalIncome, previousEgenavgift, previousClaimedEgenavgift } = formInput;
 	const totalSelfEmployedIncome = activeIncome + passiveIncome + previousClaimedEgenavgift - previousEgenavgift;
 
@@ -192,7 +375,7 @@ export function calculate(formInput: FormInput, d: DataPayload) {
 	const publicServiceTax = getAmountWithLimit(taxableIncome, d.publicServiceTax.rate, d.publicServiceTax.limit) * -1;
 	const totalTax = municipalIncomeTax + pension.taxEmployed + pension.taxOther + egenavgifter.total + funeralTax + publicServiceTax;
 
-	const employmentTaxDeduction = getJobbskatteavdrag(activeIncome, grundAvdrag, d);
+	const employmentTaxDeduction = getJobbskatteavdrag(activeIncome, grundAvdrag, municipalIncomeTax, d);
 	const totalFinalTax = totalTax + employmentTaxDeduction + capitalIncomeTax;
 	const totalFinalTaxRate = -100 * totalFinalTax / (salary + activeIncome + passiveIncome + capitalIncome);
 
