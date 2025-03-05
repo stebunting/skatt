@@ -60,3 +60,11 @@ declare module "*.gif" {
 	const value: string;
 	export default value;
 }
+
+declare global {
+	namespace jest {
+		interface Matchers<R> {
+			toEqualInteger(received: number): CustomMatcherResult;
+		}
+	}
+}
