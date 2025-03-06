@@ -12,7 +12,9 @@
     "fix": "eslint src --fix",
     "lint-css": "stylelint **/*.scss",
     "fix-css": "stylelint **/*.scss --fix",
-    "test": "jest"
+    "test": "jest",
+    "predeploy": "npm run build",
+    "deploy": "rsync -avz ./dist/ rpi:skatt"
   },
   "keywords": [],
   "author": "Steve Bunting",
