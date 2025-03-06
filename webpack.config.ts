@@ -1,10 +1,21 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
-const StyleLintPlugin = require("stylelint-webpack-plugin");
+import { Configuration as WebpackConfiguration } from "webpack";
+import { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import ESLintPlugin from "eslint-webpack-plugin";
+import StyleLintPlugin from "stylelint-webpack-plugin";
+import path from "path";
 
-module.exports = (_, argv) => ({
+
+interface Configuration extends WebpackConfiguration {
+  devServer: WebpackDevServerConfiguration;
+}
+
+interface Args {
+	mode: "production" | "development";
+}
+
+const config = (_: void, argv: Args): Configuration => ({
 	entry: "./src/index.tsx",
 	module: {
 		rules: [
@@ -81,3 +92,5 @@ module.exports = (_, argv) => ({
 		},
 	},
 });
+
+export default config;
