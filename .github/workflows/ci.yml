@@ -3,60 +3,66 @@ name: CI
 on:
   push:
     branches:
-      - '**'
+      - "**"
     tags-ignore:
-      - '**'
+      - "**"
 
 jobs:
   build:
     name: Build
-    
+
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Use Node.js 22
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22'
-        cache: 'npm'
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
 
-    - name: Install Dependencies
-      run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-    - name: Write Test Data
-      run: |
-        touch src/tests/test.data.json
-        echo '${{ secrets.TESTDATA }}' > src/tests/test.data.json
-        cat src/tests/test.data.json
-    
-    - name: Run Tests
-      run: npm test
-    
-    - name: Build
-      run: npm run build
+      - name: Lint Code
+        run: |
+          npm run prettier:check
+          npm run eslint:check
+          npm run stylelint:check
 
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-artifacts
-        path: dist
-        retention-days: 7
+      - name: Write Test Data
+        run: |
+          touch src/tests/test.data.json
+          echo '${{ secrets.TESTDATA }}' > src/tests/test.data.json
+          cat src/tests/test.data.json
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist
+          retention-days: 7
 
   deploy:
     name: Deploy
 
     needs: build
-    
+
     if: github.ref == 'refs/heads/production'
 
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download Build Artifacts
-      uses: actions/download-artifact@v4  
-      with:
-        name: build-artifacts
-        path: dist
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist

@@ -2,34 +2,34 @@
 @use "~/styles/colours" as colours;
 
 .container > label {
-	display: flex;
-	flex-flow: row nowrap;
-	margin: 0.25rem 0;
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0.25rem 0;
 
-	.label {
-		flex: 1;
-	}
+  .label {
+    flex: 1;
+  }
 
-	.input {
-		width: 8rem;
-		text-align: right;
-		font-family: fonts.$mono-font;
+  .input {
+    width: 8rem;
+    text-align: right;
+    font-family: fonts.$mono-font;
 
-		&.userInput {
-			font-weight: 700;
-		}
+    &.userInput {
+      font-weight: 700;
+    }
 
-		&.negative {
-			color: colours.$red;
-			font-weight: 700;
-		}
+    &.negative {
+      color: colours.$red;
+      font-weight: 700;
+    }
 
-		&.subCalculation {
-			margin-right: 10rem;
-		}
+    &.subCalculation {
+      margin-right: 10rem;
+    }
 
-		&:read-only {
-			border: 0;
-		}
-	}
+    &:read-only {
+      border: 0;
+    }
+  }
 }

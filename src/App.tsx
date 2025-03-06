@@ -5,11 +5,10 @@ import IndexView from "~/views/IndexView";
 
 import "~/styles/master.scss";
 
-
 export default function App(): React.ReactElement {
-	return (
-		<BrowserRouter>
-			<IndexView />
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <IndexView />
+    </BrowserRouter>
+  );
 }
