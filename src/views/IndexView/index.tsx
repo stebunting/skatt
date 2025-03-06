@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 
-import data from "~/lib/data.json";
+import { readFromLocalStorage, writeToLocalStorage } from "~/lib/persistence";
 import { Year } from "~/typings/global";
+import data from "~/lib/data.json";
 
 import Calculator from "./Calculator";
 import Overview from "./Overview";
@@ -13,7 +14,18 @@ export default function IndexView(): React.ReactElement {
 	const location = useLocation();
 
 	const years = (Object.keys(data) as Array<Year>).sort((a, b) => b.localeCompare(a));
-	const [year, setYear] = useState<Year>(years[0]);
+
+	const yearReducer = (_: Year, action: Year) => {
+		writeToLocalStorage("year", action);
+		return action;
+	};
+
+	const initYear = () => {
+		const ls = readFromLocalStorage("year");
+		return ls ? ls : years[0];
+	};
+
+	const [year, setYear] = useReducer(yearReducer, years[0], initYear);
 
 	const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const { value } = event.currentTarget;

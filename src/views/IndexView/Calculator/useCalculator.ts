@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 
+import { readFromLocalStorage, writeToLocalStorage } from "~/lib/persistence";
 import { IncomeDetails, TaxDetails, calculate } from "~/lib/calculations";
 import { Year } from "~/typings/global";
 import data from "~/lib/data.json";
 
 
 export function useCalculator(initialYear: Year) {
-	const [formInput, setIncomeDetails] = useState<IncomeDetails>({
+	const formInitialState: IncomeDetails = {
 		salary: 0,
 		benefits: 0,
 		activeIncome: 0,
@@ -20,7 +21,19 @@ export function useCalculator(initialYear: Year) {
 		capitalIncome: 0,
 		capitalExpenses: 0,
 		rutArbete: 0,
-	});
+	};
+
+	const initForm = () => {
+		const ls = readFromLocalStorage("formInput");
+		return ls ? ls : formInitialState;
+	};
+
+	const inputReducer = (state: IncomeDetails, action: Partial<IncomeDetails>): IncomeDetails =>  {
+		writeToLocalStorage("formInput", { ...state, ...action });
+		return { ...state, ...action };
+	};
+	const [formInput, setIncomeDetails] = useReducer(inputReducer, formInitialState, initForm);
+
 	const [calculatedValues, setCalculatedValues] = useState<TaxDetails>({
 		income: {
 			earnedIncome: 0,
@@ -80,7 +93,7 @@ export function useCalculator(initialYear: Year) {
 			? parseInt(valueStr.replace(/ /g, ""), 10)
 			: 0;
 		if (!Number.isNaN(value)) {
-			setIncomeDetails({ ...formInput, [id]: value });
+			setIncomeDetails({ [id]: value });
 		}
 	};
 
