@@ -1,6 +1,12 @@
-import { getGrundavdrag, getJobbskatteavdrag, getPGI, PensionReturnPayload, round } from "~/lib/calculations";
+import {
+	getGrundavdrag,
+	getJobbskatteavdrag,
+	getPGI,
+	PGI
+} from "~/lib/calculations";
 import { Year } from "~/typings/global";
 import * as data from "~/lib/data.json";
+import { round } from "~/lib/helpers";
 
 describe("calculations...", () => {
 	test("rounds to 100", () => {
@@ -59,7 +65,7 @@ describe("calculations...", () => {
 			year: Year;
 			salary: number;
 			activeIncome: number;
-			pension: PensionReturnPayload;
+			pension: PGI;
 		}
 
 		const tests: Array<Test> = [{

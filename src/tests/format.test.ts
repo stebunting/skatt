@@ -1,4 +1,4 @@
-import { formatNumber } from "~/lib/format";
+import { formatNumber } from "~/lib/helpers";
 
 describe("formatNumber...", () => {
 	test("formats numbers correctlys", () => {

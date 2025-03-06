@@ -1,25 +1,12 @@
 import { IncomeDetails, TaxDetails } from "~/lib/calculations";
 
 export interface DataPayload {
-	schablonavdrag: SchablonAvdrag;
 	prisbasbelopp: number;
 	pgi: PGILimits;
 	municipalIncomeTaxRate: number;
-	stateIncomeTax: StateIncomeTaxThreshold;
+	stateIncomeTax: StateIncomeTaxRates;
 	capitalIncomeTaxRate: number;
-	deductibles: {
-		healthInsuranceTaxRate: number;
-		parentalInsuranceTaxRate: number;
-		retirementPensionTaxRate: number;
-		survivorsPensionContributionRate: number;
-		labourMarketTaxRate: number;
-		occupationalInjuryTaxRate: number;
-		generalPayrollTaxRate: number;
-	};
-	reductionForActiveBusiness: {
-		rate: number;
-		limit: number;
-	};
+	egenavgifter: EgenavgifterRates;
 	funeralTaxRate: number,
 	publicServiceTax: {
 			rate: number;
@@ -39,13 +26,26 @@ export interface PGILimits {
 	incomeCeilingRounding: number;
 }
 
-export interface SchablonAvdrag {
-	rate: number;
-	limit: number;
-	remainingRate: number;
+export interface EgenavgifterRates {
+	schablonavdrag: {
+		rate: number;
+		limit: number;
+		remainingRate: number;
+	};
+	healthInsuranceTaxRate: number;
+	parentalInsuranceTaxRate: number;
+	retirementPensionTaxRate: number;
+	survivorsPensionContributionRate: number;
+	labourMarketTaxRate: number;
+	occupationalInjuryTaxRate: number;
+	generalPayrollTaxRate: number;
+	reductionForActiveBusiness: {
+		rate: number;
+		limit: number;
+	};
 }
 
-export type StateIncomeTaxThreshold = Array<{
+export type StateIncomeTaxRates = Array<{
 	rate: number;
 	threshold: number;
 }>

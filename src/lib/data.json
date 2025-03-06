@@ -1,10 +1,5 @@
 {
 	"2024": {
-		"schablonavdrag": {
-			"rate": 0,
-			"limit": 0,
-			"remainingRate": 25
-		},
 		"prisbasbelopp": 57300,
 		"pgi": {
 			"inkomstbasbelopp": 76200,
@@ -16,18 +11,23 @@
 			"threshold": 598500
 		}],
 		"capitalIncomeTaxRate": 30,
-		"deductibles": {
+		"egenavgifter": {
+			"schablonavdrag": {
+				"rate": 0,
+				"limit": 0,
+				"remainingRate": 25
+			},
 			"healthInsuranceTaxRate": 3.64,
 			"parentalInsuranceTaxRate": 2.6,
 			"retirementPensionTaxRate": 10.21,
 			"survivorsPensionContributionRate": 0.6,
 			"labourMarketTaxRate": 0.1,
 			"occupationalInjuryTaxRate": 0.2,
-			"generalPayrollTaxRate": 11.62
-		},
-		"reductionForActiveBusiness": {
-			"rate": 7.5,
-			"limit": 15000
+			"generalPayrollTaxRate": 11.62,
+			"reductionForActiveBusiness": {
+				"rate": 7.5,
+				"limit": 15000
+			}
 		},
 		"funeralTaxRate": 0.065,
 		"publicServiceTax": {
@@ -51,11 +51,6 @@
 		}
 	},
 	"2023": {
-		"schablonavdrag": {
-			"rate": 0,
-			"limit": 0,
-			"remainingRate": 25
-		},
 		"prisbasbelopp": 52500,
 		"pgi": {
 			"inkomstbasbelopp": 74300,
@@ -67,18 +62,23 @@
 			"threshold": 598500
 		}],
 		"capitalIncomeTaxRate": 30,
-		"deductibles": {
+		"egenavgifter": {
+			"schablonavdrag": {
+				"rate": 0,
+				"limit": 0,
+				"remainingRate": 25
+			},
 			"healthInsuranceTaxRate": 3.64,
 			"parentalInsuranceTaxRate": 2.6,
 			"retirementPensionTaxRate": 10.21,
 			"survivorsPensionContributionRate": 0.6,
 			"labourMarketTaxRate": 0.1,
 			"occupationalInjuryTaxRate": 0.2,
-			"generalPayrollTaxRate": 11.62
-		},
-		"reductionForActiveBusiness": {
-			"rate": 7.5,
-			"limit": 15000
+			"generalPayrollTaxRate": 11.62,
+			"reductionForActiveBusiness": {
+				"rate": 7.5,
+				"limit": 15000
+			}
 		},
 		"funeralTaxRate": 0.065,
 		"publicServiceTax": {
@@ -102,11 +102,6 @@
 		}
 	},
 	"2022": {
-		"schablonavdrag": {
-			"rate": 0,
-			"limit": 0,
-			"remainingRate": 25
-		},
 		"prisbasbelopp": 48300,
 		"pgi": {
 			"inkomstbasbelopp": 71000,
@@ -118,18 +113,23 @@
 			"threshold": 540700
 		}],
 		"capitalIncomeTaxRate": 30,
-		"deductibles": {
+		"egenavgifter": {
+			"schablonavdrag": {
+				"rate": 0,
+				"limit": 0,
+				"remainingRate": 25
+			},
 			"healthInsuranceTaxRate": 3.64,
 			"parentalInsuranceTaxRate": 2.6,
 			"retirementPensionTaxRate": 10.21,
 			"survivorsPensionContributionRate": 0.6,
 			"labourMarketTaxRate": 0.1,
 			"occupationalInjuryTaxRate": 0.2,
-			"generalPayrollTaxRate": 11.62
-		},
-		"reductionForActiveBusiness": {
-			"rate": 7.5,
-			"limit": 15000
+			"generalPayrollTaxRate": 11.62,
+			"reductionForActiveBusiness": {
+				"rate": 7.5,
+				"limit": 15000
+			}
 		},
 		"funeralTaxRate": 0.065,
 		"publicServiceTax": {
@@ -153,11 +153,6 @@
 		}
 	},
 	"2021": {
-		"schablonavdrag": {
-			"rate": 0,
-			"limit": 0,
-			"remainingRate": 25
-		},
 		"prisbasbelopp": 47600,
 		"pgi": {
 			"inkomstbasbelopp": 68200,
@@ -169,18 +164,23 @@
 			"threshold": 523200
 		}],
 		"capitalIncomeTaxRate": 30,
-		"deductibles": {
+		"egenavgifter": {
+			"schablonavdrag": {
+				"rate": 0,
+				"limit": 0,
+				"remainingRate": 25
+			},
 			"healthInsuranceTaxRate": 3.64,
 			"parentalInsuranceTaxRate": 2.6,
 			"retirementPensionTaxRate": 10.21,
 			"survivorsPensionContributionRate": 0.6,
 			"labourMarketTaxRate": 0.1,
 			"occupationalInjuryTaxRate": 0.2,
-			"generalPayrollTaxRate": 11.62
-		},
-		"reductionForActiveBusiness": {
-			"rate": 7.5,
-			"limit": 15000
+			"generalPayrollTaxRate": 11.62,
+			"reductionForActiveBusiness": {
+				"rate": 7.5,
+				"limit": 15000
+			}
 		},
 		"funeralTaxRate": 0.065,
 		"publicServiceTax": {	
@@ -204,11 +204,6 @@
 		}
 	},
 	"2020": {
-		"schablonavdrag": {
-			"rate": 10,
-			"limit": 111111,
-			"remainingRate": 25
-		},
 		"prisbasbelopp": 47300,
 		"pgi": {
 			"inkomstbasbelopp": 66800,
@@ -220,18 +215,23 @@
 			"threshold": 509300
 		}],
 		"capitalIncomeTaxRate": 30,
-		"deductibles": {
+		"egenavgifter": {
+			"schablonavdrag": {
+				"rate": 10,
+				"limit": 111111,
+				"remainingRate": 25
+			},
 			"healthInsuranceTaxRate": 3.64,
 			"parentalInsuranceTaxRate": 2.6,
 			"retirementPensionTaxRate": 10.21,
 			"survivorsPensionContributionRate": 0.6,
 			"labourMarketTaxRate": 0.1,
 			"occupationalInjuryTaxRate": 0.2,
-			"generalPayrollTaxRate": 11.62
-		},
-		"reductionForActiveBusiness": {
-			"rate": 7.5,
-			"limit": 15000
+			"generalPayrollTaxRate": 11.62,
+			"reductionForActiveBusiness": {
+				"rate": 7.5,
+				"limit": 15000
+			}
 		},
 		"funeralTaxRate": 0.065,
 		"publicServiceTax": {
@@ -255,11 +255,6 @@
 		}
 	},
 	"2019": {
-		"schablonavdrag": {
-			"rate": 0,
-			"limit": 0,
-			"remainingRate": 25
-		},
 		"prisbasbelopp": 46500,
 		"pgi": {
 			"inkomstbasbelopp": 64400,
@@ -274,18 +269,23 @@
 			"threshold": 689300
 		}],
 		"capitalIncomeTaxRate": 30,
-		"deductibles": {
+		"egenavgifter": {
+			"schablonavdrag": {
+				"rate": 0,
+				"limit": 0,
+				"remainingRate": 25
+			},
 			"healthInsuranceTaxRate": 3.64,
 			"parentalInsuranceTaxRate": 2.6,
 			"retirementPensionTaxRate": 10.21,
 			"survivorsPensionContributionRate": 0.6,
 			"labourMarketTaxRate": 0.1,
 			"occupationalInjuryTaxRate": 0.2,
-			"generalPayrollTaxRate": 11.62
-		},
-		"reductionForActiveBusiness": {
-			"rate": 7.5,
-			"limit": 15000
+			"generalPayrollTaxRate": 11.62,
+			"reductionForActiveBusiness": {
+				"rate": 7.5,
+				"limit": 15000
+			}
 		},
 		"funeralTaxRate": 0.065,
 		"publicServiceTax": {
@@ -309,11 +309,6 @@
 		}
 	},
 	"2018": {
-		"schablonavdrag": {
-			"rate": 0,
-			"limit": 0,
-			"remainingRate": 25
-		},
 		"prisbasbelopp": 45500,
 		"pgi": {
 			"inkomstbasbelopp": 62500,
@@ -328,18 +323,23 @@
 			"threshold": 662300
 		}],
 		"capitalIncomeTaxRate": 30,
-		"deductibles": {
+		"egenavgifter": {
+			"schablonavdrag": {
+				"rate": 0,
+				"limit": 0,
+				"remainingRate": 25
+			},
 			"healthInsuranceTaxRate": 4.44,
 			"parentalInsuranceTaxRate": 2.6,
 			"retirementPensionTaxRate": 10.21,
 			"survivorsPensionContributionRate": 0.7,
 			"labourMarketTaxRate": 0.1,
 			"occupationalInjuryTaxRate": 0.2,
-			"generalPayrollTaxRate": 10.72
-		},
-		"reductionForActiveBusiness": {
-			"rate": 7.5,
-			"limit": 15000
+			"generalPayrollTaxRate": 10.72,
+			"reductionForActiveBusiness": {
+				"rate": 7.5,
+				"limit": 15000
+			}
 		},
 		"funeralTaxRate": 0.075,
 		"publicServiceTax": {
@@ -363,11 +363,6 @@
 		}
 	},
 	"2017": {
-		"schablonavdrag": {
-			"rate": 0,
-			"limit": 0,
-			"remainingRate": 25
-		},
 		"prisbasbelopp": 44800,
 		"pgi": {
 			"inkomstbasbelopp": 61500,
@@ -382,18 +377,23 @@
 			"threshold": 638500
 		}],
 		"capitalIncomeTaxRate": 30,
-		"deductibles": {
+		"egenavgifter": {
+			"schablonavdrag": {
+				"rate": 0,
+				"limit": 0,
+				"remainingRate": 25
+			},
 			"healthInsuranceTaxRate": 4.44,
 			"parentalInsuranceTaxRate": 2.6,
 			"retirementPensionTaxRate": 10.21,
 			"survivorsPensionContributionRate": 0.7,
 			"labourMarketTaxRate": 0.1,
 			"occupationalInjuryTaxRate": 0.2,
-			"generalPayrollTaxRate": 10.72
-		},
-		"reductionForActiveBusiness": {
-			"rate": 7.5,
-			"limit": 15000
+			"generalPayrollTaxRate": 10.72,
+			"reductionForActiveBusiness": {
+				"rate": 7.5,
+				"limit": 15000
+			}
 		},
 		"funeralTaxRate": 0.075,
 		"publicServiceTax": {
@@ -417,11 +417,6 @@
 		}
 	},
 	"2016": {
-		"schablonavdrag": {
-			"rate": 0,
-			"limit": 0,
-			"remainingRate": 25
-		},
 		"prisbasbelopp": 44300,
 		"pgi": {
 			"inkomstbasbelopp": 59300,
@@ -436,18 +431,23 @@
 			"threshold": 625800
 		}],
 		"capitalIncomeTaxRate": 30,
-		"deductibles": {
+		"egenavgifter": {
+			"schablonavdrag": {
+				"rate": 0,
+				"limit": 0,
+				"remainingRate": 25
+			},
 			"healthInsuranceTaxRate": 4.94,
 			"parentalInsuranceTaxRate": 2.6,
 			"retirementPensionTaxRate": 10.21,
 			"survivorsPensionContributionRate": 1.17,
 			"labourMarketTaxRate": 0.1,
 			"occupationalInjuryTaxRate": 0.3,
-			"generalPayrollTaxRate": 9.65
-		},
-		"reductionForActiveBusiness": {
-			"rate": 7.5,
-			"limit": 15000
+			"generalPayrollTaxRate": 9.65,
+			"reductionForActiveBusiness": {
+				"rate": 7.5,
+				"limit": 15000
+			}
 		},
 		"funeralTaxRate": 0.075,
 		"publicServiceTax": {

@@ -1,8 +1,8 @@
 import React from "react";
 
 import { classes } from "~/lib/classes";
-import { formatNumber } from "~/lib/format";
 import { IncomeDetails } from "~/lib/calculations";
+import { formatNumber } from "~/lib/helpers";
 
 import s from "./style.module.scss";
 

@@ -2,8 +2,7 @@ import React from "react";
 import { Year } from "~/typings/global";
 
 import data from "~/lib/data.json";
-import { formatNumber } from "~/lib/format";
-import { round } from "~/lib/calculations";
+import { formatNumber, round } from "~/lib/helpers";
 
 
 interface Props {
@@ -46,36 +45,36 @@ export default function Overview(props: Props): React.ReactElement {
 			<h2>Egenavgift</h2>
 			<div>
 				<strong>Health Insurance Tax Rate: </strong>
-				{d.deductibles.healthInsuranceTaxRate}%
+				{d.egenavgifter.healthInsuranceTaxRate}%
 			</div>
 			<div>
 				<strong>Parental Insurance Tax Rate: </strong>
-				{d.deductibles.parentalInsuranceTaxRate}%
+				{d.egenavgifter.parentalInsuranceTaxRate}%
 			</div>
 			<div>
 				<strong>Retirement Pension Tax Rate: </strong>
-				{d.deductibles.retirementPensionTaxRate}%
+				{d.egenavgifter.retirementPensionTaxRate}%
 			</div>
 			<div>
 				<strong>Survivors Pension Contribution Rate: </strong>
-				{d.deductibles.survivorsPensionContributionRate}%
+				{d.egenavgifter.survivorsPensionContributionRate}%
 			</div>
 			<div>
 				<strong>Labour Market Tax Rate: </strong>
-				{d.deductibles.labourMarketTaxRate}%
+				{d.egenavgifter.labourMarketTaxRate}%
 			</div>
 			<div>
 				<strong>Occupational Injury Tax Rate: </strong>
-				{d.deductibles.occupationalInjuryTaxRate}%
+				{d.egenavgifter.occupationalInjuryTaxRate}%
 			</div>
 			<div>
 				<strong>General Payroll Tax Rate: </strong>
-				{d.deductibles.generalPayrollTaxRate}%
+				{d.egenavgifter.generalPayrollTaxRate}%
 			</div>
 			<div>
 				<strong>Reduction for active business: </strong>
-				{d.reductionForActiveBusiness.rate}%
-				({formatNumber(d.reductionForActiveBusiness.limit)} kr Limit)
+				{d.egenavgifter.reductionForActiveBusiness.rate}%
+				({formatNumber(d.egenavgifter.reductionForActiveBusiness.limit)} kr Limit)
 			</div>
 
 			<h2>Other</h2>
