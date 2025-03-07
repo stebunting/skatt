@@ -286,4 +286,110 @@ describe("calculations...", () => {
       expect(p.taxEmployed).toEqualInteger(t.pension.taxEmployed);
     });
   });
+
+  test("calculate Grundavdrag", () => {
+    interface Test {
+      year: Year;
+      income: number;
+      grundavdrag: number;
+    }
+
+    const tests: Array<Test> = [
+      {
+        year: "2024",
+        income: 178200,
+        grundavdrag: -44200,
+      },
+      {
+        year: "2024",
+        income: 49500,
+        grundavdrag: -24300,
+      },
+      {
+        year: "2024",
+        income: 99200,
+        grundavdrag: -32800,
+      },
+      {
+        year: "2024",
+        income: 198400,
+        grundavdrag: -42200,
+      },
+      {
+        year: "2024",
+        income: 224600,
+        grundavdrag: -39500,
+      },
+      {
+        year: "2024",
+        income: 301000,
+        grundavdrag: -31900,
+      },
+      {
+        year: "2024",
+        income: 378600,
+        grundavdrag: -24100,
+      },
+      {
+        year: "2024",
+        income: 1467800,
+        grundavdrag: -16800,
+      },
+      {
+        year: "2023",
+        income: 150000,
+        grundavdrag: -40500,
+      },
+      {
+        year: "2022",
+        income: 80200,
+        grundavdrag: -27000,
+      },
+      {
+        year: "2022",
+        income: 80600,
+        grundavdrag: -27000,
+      },
+      {
+        year: "2022",
+        income: 80700,
+        grundavdrag: -27100,
+      },
+      {
+        year: "2021",
+        income: 146500,
+        grundavdrag: -36700,
+      },
+      {
+        year: "2021",
+        income: 267400,
+        grundavdrag: -24800,
+      },
+      {
+        year: "2021",
+        income: 374500,
+        grundavdrag: -14100,
+      },
+      {
+        year: "2019",
+        income: 287500,
+        grundavdrag: -21600,
+      },
+      {
+        year: "2019",
+        income: 24500,
+        grundavdrag: -19700,
+      },
+      {
+        year: "2019",
+        income: 178200,
+        grundavdrag: -32500,
+      },
+    ];
+
+    tests.forEach((t) => {
+      const pbb = data[t.year].prisbasbelopp;
+      expect(getGrundavdrag(t.income, pbb)).toBe(t.grundavdrag);
+    });
+  });
 });
