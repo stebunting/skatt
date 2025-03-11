@@ -1,0 +1,36 @@
+@use "~/styles/colours" as colours;
+
+.header {
+  background-color: colours.$header;
+  padding: 0.25rem 1rem;
+  display: flex;
+  justify-content: right;
+
+  h2 {
+    color: colours.$header-text;
+  }
+
+  button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    background-color: colours.$header;
+    color: colours.$header-text;
+  }
+}
+
+.children {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: max-height 500ms ease;
+  max-height: 0;
+
+  &.open {
+    max-height: 2000px;
+  }
+
+  &.closed {
+    max-height: 0;
+  }
+}

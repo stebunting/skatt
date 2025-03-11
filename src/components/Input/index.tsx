@@ -10,6 +10,7 @@ interface InputProps {
   label: string;
   id: keyof IncomeDetails;
   value: number;
+  fixed?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -18,6 +19,7 @@ interface CalculatedProps {
   id: string;
   value: number;
   symbol?: string;
+  fixed?: boolean;
   subCalculation?: boolean;
 }
 
@@ -26,8 +28,9 @@ export default function Input(
 ): React.ReactElement {
   const isInput = "onChange" in props;
   const symbol = "symbol" in props;
+  const fixed = "fixed" in props;
 
-  return (
+  return props.value !== 0 || fixed ? (
     <div className={s.container}>
       <label htmlFor={props.id}>
         <div className={s.label}>{props.label}</div>
@@ -46,5 +49,7 @@ export default function Input(
         />
       </label>
     </div>
+  ) : (
+    <></>
   );
 }

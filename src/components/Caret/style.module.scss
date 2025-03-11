@@ -1,0 +1,21 @@
+@use "~/styles/colours" as colours;
+
+.caret {
+  border: none;
+  transition: transform 500ms;
+  width: 32px;
+  height: 32px;
+  fill: none;
+
+  path {
+    stroke: colours.$header-text;
+  }
+
+  &.up {
+    transform: scale(1, -1);
+  }
+
+  &.down {
+    transform: scale(1, 1);
+  }
+}
