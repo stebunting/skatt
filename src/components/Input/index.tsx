@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { classes } from "~/lib/classes";
 import { IncomeDetails } from "~/lib/calculations";
@@ -18,7 +18,6 @@ interface CalculatedProps {
   label: string;
   id: string;
   value: number;
-  symbol?: string;
   fixed?: boolean;
   subCalculation?: boolean;
 }
@@ -27,8 +26,18 @@ export default function Input(
   props: InputProps | CalculatedProps,
 ): React.ReactElement {
   const isInput = "onChange" in props;
-  const symbol = "symbol" in props;
   const fixed = "fixed" in props;
+
+  const [value, setValue] = useState(formatNumber(props.value));
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value);
+    if (isInput) {
+      props.onChange(event);
+    }
+  };
+
+  useEffect(() => setValue(formatNumber(props.value)), [props.value]);
 
   return props.value !== 0 || fixed ? (
     <div className={s.container}>
@@ -43,8 +52,10 @@ export default function Input(
           })}
           type="text"
           id={props.id}
-          value={`${formatNumber(props.value)}${symbol ? props.symbol : ""}`}
-          onChange={isInput ? props.onChange : undefined}
+          value={value}
+          onChange={handleChange}
+          onFocus={() => value === "0" && setValue("")}
+          onBlur={() => setValue(formatNumber(props.value))}
           readOnly={!isInput}
         />
       </label>
