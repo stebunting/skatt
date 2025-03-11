@@ -194,7 +194,10 @@ export function getJobbskatteavdrag(
         grundavdrag) *
         municipalIncomeTaxRate) /
       100;
-  } else if (income <= pbb * rates.breakpoints[3]) {
+  } else if (
+    rates.breakpoints.length < 4 ||
+    income <= pbb * rates.breakpoints[3]
+  ) {
     amount =
       ((rates.prisbasbeloppAmount[2] * pbb + grundavdrag) *
         municipalIncomeTaxRate) /
