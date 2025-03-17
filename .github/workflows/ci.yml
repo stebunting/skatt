@@ -33,10 +33,7 @@ jobs:
           npm run stylelint:check
 
       - name: Write Test Data
-        run: |
-          touch src/tests/test.data.json
-          echo '${{ secrets.TESTDATA }}' > src/tests/test.data.json
-          cat src/tests/test.data.json
+        run: echo '${{ secrets.TESTDATA }}' > src/tests/test.data.json
 
       - name: Run Tests
         run: npm test
