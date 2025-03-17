@@ -46,7 +46,10 @@ describe("calculations...", () => {
     interface Test {
       year: Year;
       income: number;
+      benefits: number;
       municipalIncomeTax: number;
+      municipalIncomeTaxRate?: number;
+      pensionTax: number;
       jobbSkatteAvdrag: number;
     }
 
@@ -54,17 +57,66 @@ describe("calculations...", () => {
       {
         year: "2023",
         income: 842706,
+        benefits: 0,
         municipalIncomeTax: -254424,
+        pensionTax: 0,
         jobbSkatteAvdrag: 29526,
+      },
+      {
+        year: "2016",
+        income: 30000,
+        benefits: 0,
+        municipalIncomeTax: -3544,
+        municipalIncomeTaxRate: 31.65,
+        pensionTax: -2100,
+        jobbSkatteAvdrag: 1444,
+      },
+      {
+        year: "2016",
+        income: 224000,
+        benefits: 13000,
+        municipalIncomeTax: -66180,
+        municipalIncomeTaxRate: 31.1,
+        pensionTax: -16600,
+        jobbSkatteAvdrag: 17533,
+      },
+      {
+        year: "2024",
+        income: 35000,
+        benefits: 0,
+        municipalIncomeTax: -3394,
+        municipalIncomeTaxRate: 31.72,
+        pensionTax: -2400,
+        jobbSkatteAvdrag: 994,
+      },
+      {
+        year: "2024",
+        income: 224000,
+        benefits: 13000,
+        municipalIncomeTax: -62352,
+        municipalIncomeTaxRate: 31.38,
+        pensionTax: -16600,
+        jobbSkatteAvdrag: 22557,
       },
     ];
 
     tests.forEach((t) => {
       const d = data[t.year];
-      const grundAvdrag = getGrundavdrag(t.income, d.prisbasbelopp);
+      d.municipalIncomeTaxRate =
+        t.municipalIncomeTaxRate ?? d.municipalIncomeTaxRate;
+      const grundAvdrag = getGrundavdrag(
+        t.income + t.benefits,
+        d.prisbasbelopp,
+      );
 
       expect(
-        getJobbskatteavdrag(t.income, grundAvdrag, t.municipalIncomeTax, d),
+        getJobbskatteavdrag(
+          t.income,
+          grundAvdrag,
+          t.municipalIncomeTax,
+          t.pensionTax,
+          d,
+        ),
       ).toEqual(t.jobbSkatteAvdrag);
     });
   });

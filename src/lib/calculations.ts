@@ -168,6 +168,7 @@ export function getJobbskatteavdrag(
   income: number,
   grundavdrag: number,
   municipalIncomeTax: number,
+  pensionTax: number,
   data: DataPayload,
 ): number {
   const {
@@ -210,7 +211,7 @@ export function getJobbskatteavdrag(
       0.03 * (income - 13.54 * pbb);
   }
 
-  return Math.floor(Math.min(amount, municipalIncomeTax * -1));
+  return Math.floor(Math.min(amount, (municipalIncomeTax - pensionTax) * -1));
 }
 
 function getStateIncomeTax(income: number, rates: StateIncomeTaxRates): number {
@@ -404,6 +405,7 @@ export function calculate(i: IncomeDetails, d: DataPayload): TaxDetails {
     i.salary + totalSelfEmployedIncome + egenavgifter.deduction,
     grundAvdrag,
     municipalIncomeTax,
+    pension.taxEmployed + pension.taxOther,
     d,
   );
   if (jobbSkatteAvdrag * -1 > avilableTaxReduction) {
