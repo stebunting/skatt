@@ -1,4 +1,57 @@
 {
+  "2026": {
+    "prisbasbelopp": 59200,
+    "pgi": {
+      "inkomstbasbelopp": 83400,
+      "incomeCeilingRounding": 1
+    },
+    "municipalIncomeTaxRate": 30.55,
+    "stateIncomeTax": [
+      {
+        "rate": 20,
+        "threshold": 643000
+      }
+    ],
+    "capitalIncomeTaxRate": 30,
+    "egenavgifter": {
+      "schablonavdrag": {
+        "rate": 0,
+        "limit": 0,
+        "remainingRate": 25
+      },
+      "healthInsuranceTaxRate": 3.64,
+      "parentalInsuranceTaxRate": 2,
+      "retirementPensionTaxRate": 10.21,
+      "survivorsPensionContributionRate": 0.3,
+      "labourMarketTaxRate": 0.1,
+      "occupationalInjuryTaxRate": 0.1,
+      "generalPayrollTaxRate": 12.62,
+      "reductionForActiveBusiness": {
+        "rate": 7.5,
+        "limit": 15000
+      }
+    },
+    "funeralTaxRate": 0.07,
+    "publicServiceTax": {
+      "rate": 1,
+      "limit": 1184
+    },
+    "taxableEarnedIncomeReduction": {
+      "rate": 0.75,
+      "threshold": 40000,
+      "limit": 1500
+    },
+    "jobbSkatteavdragRate": {
+      "breakpoints": [0.91, 3.24, 8.08],
+      "rate": [38.74, 25.1, 0],
+      "prisbasbeloppAmount": [0.91, 1.813, 3.027]
+    },
+    "capitalDeficit": {
+      "rate": 30,
+      "limit": 100000,
+      "remainingRate": 21
+    }
+  },
   "2025": {
     "prisbasbelopp": 58800,
     "pgi": {
