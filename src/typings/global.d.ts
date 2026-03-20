@@ -26,13 +26,15 @@ export interface PGILimits {
   incomeCeilingRounding: number;
 }
 
+export type Karensdagar = "1" | "7" | "14" | "30" | "60" | "90";
+
 export interface EgenavgifterRates {
   schablonavdrag: {
     rate: number;
     limit: number;
     remainingRate: number;
   };
-  healthInsuranceTaxRate: number;
+  healthInsuranceTaxRate: Record<Karensdagar, number>;
   parentalInsuranceTaxRate: number;
   retirementPensionTaxRate: number;
   survivorsPensionContributionRate: number;
@@ -72,7 +74,8 @@ export type Year =
   | "2022"
   | "2023"
   | "2024"
-  | "2025";
+  | "2025"
+  | "2026";
 
 declare module "data.json" {
   const value: Record<Year, DataPayload>;

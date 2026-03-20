@@ -2,7 +2,7 @@ import { useEffect, useReducer, useState } from "react";
 
 import { readFromLocalStorage, writeToLocalStorage } from "~/lib/persistence";
 import { IncomeDetails, TaxDetails, calculate } from "~/lib/calculations";
-import { Year } from "~/typings/global";
+import { Karensdagar, Year } from "~/typings/global";
 import data from "~/lib/data.json";
 
 export function useCalculator(initialYear: Year) {
@@ -20,6 +20,7 @@ export function useCalculator(initialYear: Year) {
     capitalIncome: 0,
     capitalExpenses: 0,
     rutArbete: 0,
+    karens: "7" as Karensdagar,
   };
 
   const initForm = () => {
@@ -93,7 +94,9 @@ export function useCalculator(initialYear: Year) {
     }));
   }, [year, formInput]);
 
-  const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleValueChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { id, value: valueStr } = event.currentTarget;
     const value =
       valueStr !== "" ? parseInt(valueStr.replace(/ /g, ""), 10) : 0;

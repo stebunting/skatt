@@ -1,0 +1,19 @@
+@use "~/styles/fonts" as fonts;
+@use "~/styles/colours" as colours;
+
+.container > label {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0.25rem 0;
+
+  .label {
+    flex: 1;
+  }
+
+  .input {
+    width: 8rem;
+    text-align: right;
+    font-family: fonts.$mono-font;
+    padding: 0.1rem 0.25rem;
+  }
+}

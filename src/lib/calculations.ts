@@ -2,6 +2,7 @@ import {
   CapitalDeficit,
   DataPayload,
   EgenavgifterRates,
+  Karensdagar,
   PGILimits,
   StateIncomeTaxRates,
   TaxableEarnedIncomeReduction,
@@ -88,6 +89,7 @@ export function getEgenavgifter(
   totalSelfEmployedIncome: number,
   activeIncome: number,
   egenavgifter: EgenavgifterRates,
+  karens: Karensdagar,
 ): Egenavgifter {
   const deduction =
     totalSelfEmployedIncome > egenavgifter.schablonavdrag.limit
@@ -111,7 +113,7 @@ export function getEgenavgifter(
     healthInsuranceTax:
       getAmountByPercentage(
         egenavgiftIncome,
-        egenavgifter.healthInsuranceTaxRate,
+        egenavgifter.healthInsuranceTaxRate[karens],
       ) * -1,
     parentalInsuranceTax:
       getAmountByPercentage(
@@ -267,6 +269,7 @@ export interface IncomeDetails {
   capitalIncome: number;
   capitalExpenses: number;
   rutArbete: number;
+  karens: Karensdagar;
 }
 
 export interface TaxDetails {
@@ -329,6 +332,7 @@ export function calculate(i: IncomeDetails, d: DataPayload): TaxDetails {
     totalSelfEmployedIncome,
     i.activeIncome,
     d.egenavgifter,
+    i.karens,
   );
   const activeBusinessSurplus =
     totalSelfEmployedIncome + egenavgifter.deduction;

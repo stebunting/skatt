@@ -1,8 +1,8 @@
-import { calculate } from "~/lib/calculations";
+import { calculate, IncomeDetails } from "~/lib/calculations";
 import * as data from "~/lib/data.json";
-import * as tests from "./test.data.json";
-
 import { Year } from "~/typings/global";
+
+import * as tests from "./test.data.json";
 
 describe("cases", () => {
   test("are correct", () => {
@@ -11,7 +11,7 @@ describe("cases", () => {
         return;
       }
       const d = data[t.year as Year];
-      const c = calculate(t.incomeDetails, d);
+      const c = calculate(t.incomeDetails as IncomeDetails, d);
 
       expect(c.income.earnedIncome).toEqualInteger(
         t.taxDetails.income.earnedIncome,

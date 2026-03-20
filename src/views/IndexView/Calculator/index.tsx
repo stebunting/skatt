@@ -4,6 +4,8 @@ import Input from "~/components/Input";
 import { Year } from "~/typings/global";
 import { useCalculator } from "./useCalculator";
 import Header from "~/components/Header";
+import Select from "~/components/Select";
+import data from "~/lib/data.json";
 
 import s from "./style.module.scss";
 
@@ -16,6 +18,10 @@ export default function Calculator(props: Props): React.ReactElement {
     useCalculator(props.year);
 
   useEffect(() => setYear(props.year), [props.year, setYear]);
+
+  const karensDagar = Object.keys(
+    data[props.year].egenavgifter.healthInsuranceTaxRate,
+  );
 
   return (
     <div>
@@ -113,6 +119,13 @@ export default function Calculator(props: Props): React.ReactElement {
             label="Self Employed Sick Pay"
             value={formInput.selfEmployedSickPay}
             fixed
+            onChange={handleValueChange}
+          />
+          <Select
+            id="karens"
+            label="Karens Dagar"
+            value={formInput.karens}
+            list={karensDagar}
             onChange={handleValueChange}
           />
         </div>

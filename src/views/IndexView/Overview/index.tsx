@@ -47,7 +47,15 @@ export default function Overview(props: Props): React.ReactElement {
       <h2>Egenavgift</h2>
       <div>
         <strong>Health Insurance Tax Rate: </strong>
-        {d.egenavgifter.healthInsuranceTaxRate}%
+        {Object.entries(d.egenavgifter.healthInsuranceTaxRate).map(
+          ([karens, rate], i) =>
+            `${karens}: ${rate}%${
+              i <
+              Object.values(d.egenavgifter.healthInsuranceTaxRate).length - 1
+                ? ", "
+                : ""
+            }`,
+        )}
       </div>
       <div>
         <strong>Parental Insurance Tax Rate: </strong>

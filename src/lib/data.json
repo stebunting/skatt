@@ -19,7 +19,14 @@
         "limit": 0,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 3.64,
+      "healthInsuranceTaxRate": {
+        "1": 3.75,
+        "7": 3.64,
+        "14": 3.54,
+        "30": 3.34,
+        "60": 3.08,
+        "90": 2.9
+      },
       "parentalInsuranceTaxRate": 2,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 0.3,
@@ -72,7 +79,14 @@
         "limit": 0,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 3.64,
+      "healthInsuranceTaxRate": {
+        "1": 3.75,
+        "7": 3.64,
+        "14": 3.54,
+        "30": 3.34,
+        "60": 3.09,
+        "90": 2.91
+      },
       "parentalInsuranceTaxRate": 2.6,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 0.6,
@@ -125,7 +139,14 @@
         "limit": 0,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 3.64,
+      "healthInsuranceTaxRate": {
+        "1": 3.77,
+        "7": 3.64,
+        "14": 3.53,
+        "30": 3.33,
+        "60": 3.08,
+        "90": 2.91
+      },
       "parentalInsuranceTaxRate": 2.6,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 0.6,
@@ -178,7 +199,14 @@
         "limit": 0,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 3.64,
+      "healthInsuranceTaxRate": {
+        "1": 3.88,
+        "7": 3.64,
+        "14": 3.57,
+        "30": 3.35,
+        "60": 3.08,
+        "90": 2.9
+      },
       "parentalInsuranceTaxRate": 2.6,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 0.6,
@@ -231,7 +259,14 @@
         "limit": 0,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 3.64,
+      "healthInsuranceTaxRate": {
+        "1": 3.84,
+        "7": 3.64,
+        "14": 3.59,
+        "30": 3.36,
+        "60": 3.09,
+        "90": 2.91
+      },
       "parentalInsuranceTaxRate": 2.6,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 0.6,
@@ -284,7 +319,14 @@
         "limit": 0,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 3.64,
+      "healthInsuranceTaxRate": {
+        "1": 3.93,
+        "7": 3.64,
+        "14": 3.53,
+        "30": 3.33,
+        "60": 3.08,
+        "90": 2.91
+      },
       "parentalInsuranceTaxRate": 2.6,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 0.6,
@@ -337,7 +379,14 @@
         "limit": 111111,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 3.64,
+      "healthInsuranceTaxRate": {
+        "1": 3.92,
+        "7": 3.64,
+        "14": 3.54,
+        "30": 3.34,
+        "60": 3.1,
+        "90": 2.92
+      },
       "parentalInsuranceTaxRate": 2.6,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 0.6,
@@ -394,7 +443,14 @@
         "limit": 0,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 3.64,
+      "healthInsuranceTaxRate": {
+        "1": 3.97,
+        "7": 3.64,
+        "14": 3.55,
+        "30": 3.35,
+        "60": 3.11,
+        "90": 2.94
+      },
       "parentalInsuranceTaxRate": 2.6,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 0.6,
@@ -451,7 +507,14 @@
         "limit": 0,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 4.44,
+      "healthInsuranceTaxRate": {
+        "1": 4.8,
+        "7": 4.44,
+        "14": 4.35,
+        "30": 4.11,
+        "60": 3.82,
+        "90": 3.62
+      },
       "parentalInsuranceTaxRate": 2.6,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 0.7,
@@ -508,7 +571,14 @@
         "limit": 0,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 4.44,
+      "healthInsuranceTaxRate": {
+        "1": 4.76,
+        "7": 4.44,
+        "14": 4.35,
+        "30": 4.09,
+        "60": 3.78,
+        "90": 3.56
+      },
       "parentalInsuranceTaxRate": 2.6,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 0.7,
@@ -565,7 +635,14 @@
         "limit": 0,
         "remainingRate": 25
       },
-      "healthInsuranceTaxRate": 4.94,
+      "healthInsuranceTaxRate": {
+        "1": 5.32,
+        "7": 4.94,
+        "14": 4.85,
+        "30": 4.53,
+        "60": 4.19,
+        "90": 3.93
+      },
       "parentalInsuranceTaxRate": 2.6,
       "retirementPensionTaxRate": 10.21,
       "survivorsPensionContributionRate": 1.17,
