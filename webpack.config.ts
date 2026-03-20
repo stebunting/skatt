@@ -63,6 +63,7 @@ const config = (_: void, argv: Args): Configuration => ({
     new ESLintPlugin({
       extensions: [".js", ".jsx", ".ts", ".tsx"],
       failOnWarning: argv.mode === "production",
+      failOnError: argv.mode === "production",
     }),
     new StyleLintPlugin({
       extensions: ".scss",
