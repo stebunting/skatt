@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es2022",
-    "moduleResolution": "node",
+    "target": "es6",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "lib": ["dom"],
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -11,7 +11,7 @@
     "sourceMap": true,
     "strict": true,
     "noImplicitAny": true,
-    "baseUrl": "./",
+    "types": ["jest", "node"],
     "paths": {
       "~/*": ["./src/*"]
     }
