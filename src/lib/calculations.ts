@@ -33,8 +33,8 @@ export function getPGI(
   activeIncome = round(Math.min(activeIncome, availableIncome), 100, "down");
 
   // Calculate taxes
-  const taxEmployed = round(salary * -0.07, 100);
-  const taxOther = round(activeIncome * -0.07, 100);
+  const taxEmployed = round(Math.floor(salary * 0.07) * -1, 100);
+  const taxOther = round(Math.floor(activeIncome * 0.07) * -1, 100);
 
   // Calculate PGI
   const employmentIncome = Math.min(salary + taxEmployed, availablePGI);
