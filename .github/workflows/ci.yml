@@ -17,10 +17,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
 
-      - name: Use Node.js 25
+      - name: Use Node.js 24
         uses: actions/setup-node@v6
         with:
-          node-version: "25"
+          node-version: "24"
           cache: "npm"
 
       - name: Install Dependencies
@@ -42,7 +42,7 @@ jobs:
         run: npm run build
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: build-artifacts
           path: dist
@@ -59,7 +59,7 @@ jobs:
 
     steps:
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: build-artifacts
           path: dist
